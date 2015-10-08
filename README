@@ -1,0 +1,14 @@
+README for Seq64-tests 0.9.9.5 (current branch = "testing")
+Chris Ahlstrom
+2015-10-06 to 2015-10-06
+
+The seq64-tests project provides testing for the libraries used
+in the Sequencer64 project.
+
+We can do some manual testing, but it is too easy to miss
+something.
+
+This package is oriented to developers.  Please see the
+INSTALL file for a brief description of installation.
+
+# vim: sw=4 ts=4 wm=4 et ft=sh

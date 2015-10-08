@@ -1,0 +1,75 @@
+INSTALL for Seq64-tests v 0.9.9.5
+Chris Ahlstrom
+2015-10-06 to 2015-10-06
+
+The current packaging for Seq64-tests is aimed at developers.
+There is currently no configure script... it must be bootstrapped.
+
+Steps:
+
+   0.  Preload any DEPENDENCIES, as listed at the end of this document.
+       However, if some are missing, the configure script will tell you,
+       or, at worst, a buld error will tell you.
+
+   1.  Check-out the branch you want.  Make a branch if you want to make
+       changes.
+
+   2. From the top project directory, run the commands:
+
+      $ ./bootstrap
+      $ ./configure
+
+      For debugging without libtool getting in the way, just run the
+      following command, which will add the --enable-debug and
+      --disable-shared options to a configure run:
+
+      $ ./bootstrap --enable-debug
+
+   3. Run the make command:
+
+      $ make
+
+      If you do not care about the documentation and debian packaging,
+      change to the various sub-project directories before running make.
+
+   4. To install, ... Well, this project is for testing, not installation.
+
+CONFIGURE OPTIONS FOR TEST FEATURES:
+
+    --disable-lash
+
+        Undefines the SEQ64_LASH_SUPPORT macro, which is otherwise defined
+        by default.
+
+    --disable-jack
+    
+        Undefines the SEQ64_JACK_SUPPORT macro, which is otherwise defined
+        by default.
+
+    --disable-jack-session
+
+        Undefines the SEQ64_JACK_SUPPORT macro, which is defined if JACK
+        support is defined, and the jack/session.h file is found.
+
+DEPENDENCIES:
+
+   With luck, the following dependencies will bring in their own
+   dependencies when installed.
+
+   Code:
+
+      -  libgtkmm-2.4-dev (dev is the header-file package)
+      -  libsigc++-2.0-dev
+      -  libjack-jackd2-dev
+      -  liblash-compat-dev (optional)
+      -  xpccut++ and xpccut libraries installed from the xpcutxx project
+
+   Build tools:
+
+      -  automake and autoconf
+      -  autoconf-archive
+      -  g++
+      -  make
+      -  libtool
+
+# vim: sw=4 ts=4 wm=8 et ft=sh
