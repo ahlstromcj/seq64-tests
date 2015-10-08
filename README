@@ -1,6 +1,6 @@
-README for Seq64-tests 0.9.9.5 (current branch = "testing")
+README for Seq64-tests 0.9.9.5 (current branch = "master")
 Chris Ahlstrom
-2015-10-06 to 2015-10-06
+2015-10-06 to 2015-10-07
 
 The seq64-tests project provides testing for the libraries used
 in the Sequencer64 project.
@@ -10,5 +10,36 @@ something.
 
 This package is oriented to developers.  Please see the
 INSTALL file for a brief description of installation.
+
+Usage:
+
+    The usage of this test project requires building a debug version
+    of the sequencer64 project, building and installing the xpccutxx
+    project, and building and running the seq64-tests project.
+    All projects are found at https://github.com/ahlstromcj.
+    All project should be cloned to the same base directory; currently
+    seq64-tests expects to find the sequencer64 at the same directory level.
+
+    sequencer64:
+
+        $ ./bootstrap --enable-debug  (sets up project and runs ./configure)
+        $ make
+
+    xpccutxx:
+
+        $ ./bootstrap
+        $ ./configure
+        $ make
+        $ make check (and verify that both libraries passed their tests)
+        # make install
+
+    seq64-tests:
+
+        $ ./bootstrap --enable-debug
+        $ make
+
+        Find the executable libseq64_unit_test in libseq64/src, and run it.
+
+Later, we may have more than one unit-test executable.  Not sure yet.
 
 # vim: sw=4 ts=4 wm=4 et ft=sh
