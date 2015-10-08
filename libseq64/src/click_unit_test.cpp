@@ -9,6 +9,18 @@
  *
  *    This application provides unit tests for the click module of the
  *    libseq64 library.
+ *
+ * Group:   1
+ * Cases:
+ *
+ *    -# Default constructor and smoke test.
+ *    -# Principal constructor.
+ *    -# Copy constructor.
+ *    -# Principal assignment operator.
+ *    -# is_press()
+ *    -# is_left(), is_middle(), is_right()
+ *    -# x() and y()
+ *    -# modifier(), mod_control(), mod_control_shift(), and mod_super()
  */
 
 #include "click_unit_test.hpp"
@@ -58,6 +70,18 @@ click_unit_test_01_01 (const xpc::cut_options & options)
          {
             seq64::click c;
             ok = ! c.is_press();
+            if (ok)
+               ok = c.x() == 0;
+
+            if (ok)
+               ok = c.y() == 0;
+
+            if (ok)
+               ok = c.button() == 0;
+
+            if (ok)
+               ok = c.modifier() == seq64::SEQ64_NO_MASK;
+
             status.pass(ok);
          }
       }

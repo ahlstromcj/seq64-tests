@@ -101,13 +101,6 @@ version = $(XPC_API_MAJOR):$(XPC_API_MINOR):$(XPC_API_PATCH)
 #
 #----------------------------------------------------------------------------
 
-# AM_CPPFLAGS = 
-#  -I$(top_srcdir)/xpccut/include 
-#  -I$(top_srcdir)/xpccut++/include 
-#  -I../../include
-#  $(XPCCUTPP_CFLAGS)
-#  -I$(top_srcdir)/include
-
 AM_CXXFLAGS = \
  -I$(libseq64_incdir) \
  -I../include \
@@ -115,7 +108,6 @@ AM_CXXFLAGS = \
  $(XPCCUT_CFLAGS) \
  $(JACK_CFLAGS) \
  $(LASH_CFLAGS)
-
 
 #****************************************************************************
 # The program(s) to build, but not install
