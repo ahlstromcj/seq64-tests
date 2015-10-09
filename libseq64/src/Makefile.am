@@ -128,17 +128,10 @@ noinst_PROGRAMS = libseq64_unit_test
 #  same directory tree, the C library, xpccut.  If a bug is found, the
 #  developer will need both sets of source code anyway.
 #
-#     if STANDALONE
-#     libseq64_unit_test_DEPENDENCIES = ../src/.libs/libxpccut++.a
-#     else
-#
-# We do not need "-ldl"!
-#
-# libseq64_unit_test_LDADD = @LIBINTL@ -lpthread $(libraries)
-#
 #----------------------------------------------------------------------------
 
 libseq64_unit_test_SOURCES = \
+ click_helpers.cpp \
  click_unit_test.cpp \
  libseq64_unit_test.cpp
 
