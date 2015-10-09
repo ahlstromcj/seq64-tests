@@ -6,7 +6,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-07
- * \updates       2015-10-07
+ * \updates       2015-10-08
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -15,10 +15,10 @@
  */
 
 #include <xpc/cut.hpp>                 /* xpc::cut unit-test class            */
-
-#include <click.hpp>
+#include "click.hpp"                   /* seq64::click class                  */
 
 extern xpc::cut_status click_unit_test_01_01 (const xpc::cut_options & options);
+extern xpc::cut_status click_unit_test_01_02 (const xpc::cut_options & options);
 
 #endif   // CLICK_UNIT_TEST_HPP
 
