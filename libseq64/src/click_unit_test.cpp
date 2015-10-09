@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-07
- * \updates       2015-10-08
+ * \updates       2015-10-09
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -97,7 +97,7 @@ static bool
 create_and_check_click (int x, int y, int button, bool press, int modkey)
 {
    seq64::click c(x, y, button, press, seq64::seq_modifier_t(modkey));
-   bool result;
+   bool result = false;
    if (x < CLICK_X_MIN || x >= CLICK_X_MAX)
       result = c.x() == CLICK_BAD_VALUE;
    else
@@ -115,48 +115,46 @@ create_and_check_click (int x, int y, int button, bool press, int modkey)
       if (button < CLICK_BUTTON_MIN || button > CLICK_BUTTON_MAX)
          result = c.button() == CLICK_BAD_VALUE;
       else
+      {
          result = c.button() == button;
+         if (CLICK_IS_LEFT(button))
+         {
+            result = c.is_left();
+            if (result)
+               result = ! c.is_middle();
 
-      if (CLICK_IS_LEFT(button))
-      {
-         result = c.is_left();
-         if (result)
-            result = ! c.is_middle();
+            if (result)
+               result = ! c.is_right();
+         }
+         else if (CLICK_IS_MIDDLE(button))
+         {
+            result = ! c.is_left();
+            if (result)
+               result = c.is_middle();
 
-         if (result)
-            result = ! c.is_right();
+            if (result)
+               result = ! c.is_right();
+         }
+         else if (CLICK_IS_RIGHT(button))
+         {
+            result = ! c.is_left();
+            if (result)
+               result = ! c.is_middle();
+
+            if (result)
+               result = c.is_right();
+         }
+         else
+            result = false;
       }
-      else if (CLICK_IS_MIDDLE(button))
-      {
-         result = ! c.is_left();
-         if (result)
-            result = c.is_middle();
-
-         if (result)
-            result = ! c.is_right();
-      }
-      else if (CLICK_IS_RIGHT(button))
-      {
-         result = ! c.is_left();
-         if (result)
-            result = ! c.is_middle();
-
-         if (result)
-            result = c.is_right();
-      }
-      else
-         result = false;
    }
    if (result)
       result = c.is_press() == press;
 
    if (result)
    {
-      bool bad =
-      (
-         modkey < int(seq64::SEQ64_NO_MASK) ||
-         modkey > int(seq64::SEQ64_MASK_MAX)
-      );
+      unsigned int um = (unsigned int)(modkey); // we could use static_cast<>
+      bool bad = um >= (unsigned int)(seq64::SEQ64_MASK_MAX);
       if (bad)
          result = c.modifier() == seq64::SEQ64_MASK_MAX;
       else

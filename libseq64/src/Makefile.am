@@ -6,7 +6,7 @@
 # \library    	libseq64 test
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-07
+# \update      2015-10-09
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -72,8 +72,13 @@ builddir = @abs_top_builddir@
 #------------------------------------------------------------------------------
 
 libseq64_incdir = $(top_srcdir)/../sequencer64/libseq64/include
-libseq64_libdir = $(top_srcdir)/../sequencer64/libseq64/src/   # .libs/
+libseq64_libdir = $(top_srcdir)/../sequencer64/libseq64/src       # .libs/
 libseq64_libs = -L$(libseq64_libdir) -lseq64
+libseq64_file = $(libseq64_libdir)/libseq64.la
+
+.PHONY: $(libseq64_file)
+
+dependencies = $(libseq64_file)
 
 #*****************************************************************************
 # libtool
