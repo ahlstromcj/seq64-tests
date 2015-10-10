@@ -21,6 +21,8 @@
  *    parameters. Note that the defaults of the expected parameters match
  *    the values assumed by the default click constructor.  This match is
  *    set up for convenience in testing.
+ *
+ *    Most of the tests are done via click accessor functions.
  */
 
 bool
@@ -31,26 +33,26 @@ check_click
 )
 {
    bool result = false;
-   if (x < CLICK_X_MIN || x >= CLICK_X_MAX)
-      result = c.x() == CLICK_BAD_VALUE;
+   if (x < SEQ64_CLICK_X_MIN || x >= SEQ64_CLICK_X_MAX)
+      result = c.x() == SEQ64_CLICK_BAD_VALUE;
    else
       result = c.x() == x;
 
    if (result)
    {
-      if (y < CLICK_Y_MIN || y >= CLICK_Y_MAX)
-         result = c.y() == CLICK_BAD_VALUE;
+      if (y < SEQ64_CLICK_Y_MIN || y >= SEQ64_CLICK_Y_MAX)
+         result = c.y() == SEQ64_CLICK_BAD_VALUE;
       else
          result = c.y() == y;
    }
    if (result)
    {
-      if (button < CLICK_BUTTON_MIN || button > CLICK_BUTTON_MAX)
-         result = c.button() == CLICK_BAD_VALUE;
+      if (button < SEQ64_CLICK_BUTTON_MIN || button > SEQ64_CLICK_BUTTON_MAX)
+         result = c.button() == SEQ64_CLICK_BAD_VALUE;
       else
       {
          result = c.button() == button;
-         if (CLICK_IS_LEFT(button))
+         if (SEQ64_CLICK_IS_LEFT(button))
          {
             result = c.is_left();
             if (result)
@@ -59,7 +61,7 @@ check_click
             if (result)
                result = ! c.is_right();
          }
-         else if (CLICK_IS_MIDDLE(button))
+         else if (SEQ64_CLICK_IS_MIDDLE(button))
          {
             result = ! c.is_left();
             if (result)
@@ -68,7 +70,7 @@ check_click
             if (result)
                result = ! c.is_right();
          }
-         else if (CLICK_IS_RIGHT(button))
+         else if (SEQ64_CLICK_IS_RIGHT(button))
          {
             result = ! c.is_left();
             if (result)
@@ -86,8 +88,8 @@ check_click
 
    if (result)
    {
-      unsigned int um = (unsigned int)(modkey); // we could use static_cast<>
-      bool bad = um >= (unsigned int)(seq64::SEQ64_MASK_MAX);
+      unsigned int um = static_cast<unsigned int>(modkey);
+      bool bad = um >= static_cast<unsigned int>(seq64::SEQ64_MASK_MAX);
       if (bad)
          result = c.modifier() == seq64::SEQ64_MASK_MAX;
       else
@@ -122,7 +124,8 @@ check_click
  *    Check an existing click against itself and another one.  Use for
  *    checking the copy constructor and principal assignment operator.
  *    Note that the comparison does not use an operator ==(), since there is
- *    none defined for seq64::click -- none is needed.
+ *    none defined for seq64::click -- none is needed.  Instead, the
+ *    click getter functions are used.
  */
 
 bool
@@ -166,12 +169,12 @@ compare_clicks
 int s_x_list [] =
 {
    -1,
-   CLICK_X_MIN,
+   SEQ64_CLICK_X_MIN,
    1, 2, 3,
-   CLICK_X_MAX-2,
-   CLICK_X_MAX-1,
-   CLICK_X_MAX,
-   CLICK_X_MAX+1
+   SEQ64_CLICK_X_MAX-2,
+   SEQ64_CLICK_X_MAX-1,
+   SEQ64_CLICK_X_MAX,
+   SEQ64_CLICK_X_MAX+1
 };
 int s_x_list_size = sizeof(s_x_list) / sizeof(int);
 
@@ -182,12 +185,12 @@ int s_x_list_size = sizeof(s_x_list) / sizeof(int);
 int s_y_list [] =
 {
    -1,
-   CLICK_Y_MIN,
+   SEQ64_CLICK_Y_MIN,
    1, 2, 3,
-   CLICK_Y_MAX-2,
-   CLICK_Y_MAX-1,
-   CLICK_Y_MAX,
-   CLICK_Y_MAX+1
+   SEQ64_CLICK_Y_MAX-2,
+   SEQ64_CLICK_Y_MAX-1,
+   SEQ64_CLICK_Y_MAX,
+   SEQ64_CLICK_Y_MAX+1
 };
 int s_y_list_size = sizeof(s_y_list) / sizeof(int);
 
@@ -243,8 +246,8 @@ click_ctor_tests (click_test_t testitem)
       {
          for
          (
-            int button = CLICK_BUTTON_MIN - 1;
-            button < CLICK_BUTTON_MAX + 1;
+            int button = SEQ64_CLICK_BUTTON_MIN - 1;
+            button < SEQ64_CLICK_BUTTON_MAX + 1;
             ++button
          )
          {

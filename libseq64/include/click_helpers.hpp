@@ -39,20 +39,20 @@ enum click_test_t
 extern bool check_click
 (
    const seq64::click & c,
-   int x = CLICK_X_MIN,
-   int y = CLICK_Y_MIN,
-   int button = CLICK_BUTTON_LEFT,
-   bool press = false,
+   int x = SEQ64_CLICK_X_MIN,
+   int y = SEQ64_CLICK_Y_MIN,
+   int button = SEQ64_CLICK_BUTTON_LEFT,
+   bool press = SEQ64_CLICK_RELEASE,            /* false */
    int modkey = int(seq64::SEQ64_NO_MASK)
 );
 extern bool compare_clicks
 (
    const seq64::click & c1,
    const seq64::click & c2,
-   int x = CLICK_X_MIN,
-   int y = CLICK_Y_MIN,
-   int button = CLICK_BUTTON_LEFT,
-   bool press = false,
+   int x = SEQ64_CLICK_X_MIN,
+   int y = SEQ64_CLICK_Y_MIN,
+   int button = SEQ64_CLICK_BUTTON_LEFT,
+   bool press = SEQ64_CLICK_RELEASE,            /* false */
    int modkey = int(seq64::SEQ64_NO_MASK)
 );
 extern bool click_ctor_tests (click_test_t testitem = CT_PRINCIPAL_CONSTRUCTOR);

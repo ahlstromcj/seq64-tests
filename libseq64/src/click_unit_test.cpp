@@ -17,10 +17,11 @@
  *    -# Principal constructor.
  *    -# Copy constructor.
  *    -# Principal assignment operator.
- *    -# is_press()
- *    -# is_left(), is_middle(), is_right()
- *    -# x() and y()
- *    -# modifier(), mod_control(), mod_control_shift(), and mod_super()
+ *    -# All the accessors, indirectly:
+ *       -  is_press()
+ *       -  is_left(), is_middle(), is_right()
+ *       -  x() and y()
+ *       -  modifier(), mod_control(), mod_control_shift(), and mod_super()
  */
 
 #include "click.hpp"                   /* seq64::click class                  */
@@ -71,19 +72,7 @@ click_unit_test_01_01 (const xpc::cut_options & options)
          if (status.next_subtest("click::click()"))
          {
             seq64::click c;
-            ok = ! c.is_press();
-            if (ok)
-               ok = c.x() == 0;
-
-            if (ok)
-               ok = c.y() == 0;
-
-            if (ok)
-               ok = c.button() == 0;
-
-            if (ok)
-               ok = c.modifier() == seq64::SEQ64_NO_MASK;
-
+            ok = check_click(c);                   /* checks default values   */
             status.pass(ok);
          }
       }
