@@ -1,6 +1,7 @@
-# .gitignore for sequencer26
+# .gitignore for seq64-tests
 #
-# Updates: 2015-09-12 to 2015-09-19
+# Author:  Chris Ahlstrom
+# Updates: 2015-10-10 to 2015-10-10
 #
 # Compiled application
 
@@ -15,3 +16,4 @@ m4/ltoptions.m4
 m4/ltsugar.m4
 m4/ltversion.m4
 m4/lt~obsolete.m4
+libseq64/src/libseq64_unit_test

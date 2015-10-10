@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-06
- * \updates       2015-10-09
+ * \updates       2015-10-10
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -12,6 +12,7 @@
  */
 
 #include "click_unit_test.hpp"
+#include "keystroke_unit_test.hpp"
 
 /**
  *    This is the main routine for the libseq64_unit_test application.
@@ -30,10 +31,9 @@
  *
  */
 
-#define SEQ64_APP_NAME           "Sequencer64 libraries"
+#define SEQ64_APP_NAME           "Sequencer64 library libseq64"
 #define SEQ64_TEST_NAME          "libseq64_unit_test"
 #define SEQ64_TEST_VERSION       1.1.2
-#define DEFAULT_BASE             "../test"
 #define DEFAULT_AUTHOR           "Chris Ahlstrom"
 
 int
@@ -48,7 +48,7 @@ main
 "\n"
 SEQ64_TEST_NAME "-specific options:\n"
 "\n"
-" --none             Specify ...\n"
+" --none             No options for this unit-test, at present ....\n"
 
    ;
 
@@ -73,7 +73,7 @@ SEQ64_TEST_NAME "-specific options:\n"
             std::string arg = arglist[currentarg];
             if (arg == "--none")
             {
-               currentarg++;
+               // currentarg++;
                // if ((currentarg < argcount) && (arglist[currentarg] != 0))
                //    strcpy(gsBasename, arglist[currentarg]);
             }
@@ -82,15 +82,28 @@ SEQ64_TEST_NAME "-specific options:\n"
       }
       if (load_the_tests)
       {
+         /*
+          * Unit tests for the click module/group/class:
+          */
+
          ok = testbattery.load(click_unit_test_01_01);
          if (ok) ok = testbattery.load(click_unit_test_01_02);
          if (ok) ok = testbattery.load(click_unit_test_01_03);
          if (ok) ok = testbattery.load(click_unit_test_01_04);
+
+         /*
+          * Unit tests for the click module/group/class:
+          */
+
+         if (ok) ok = testbattery.load(keystroke_unit_test_01_01);
+         if (ok) ok = testbattery.load(keystroke_unit_test_01_02);
+         if (ok) ok = testbattery.load(keystroke_unit_test_01_03);
+         if (ok) ok = testbattery.load(keystroke_unit_test_01_04);
       }
       if (ok)
          ok = testbattery.run();
       else
-         xpccut_errprint(_("load of test functions failed"));
+         xpccut_errprint(_("load of the unit-test functions failed"));
    }
    return ok ? EXIT_SUCCESS : EXIT_FAILURE ;
 }

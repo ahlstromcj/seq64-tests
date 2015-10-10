@@ -1,16 +1,16 @@
 /**
- * \file          click_unit_test.cpp
+ * \file          keystroke_unit_test.cpp
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
- * \date          2015-10-07
- * \updates       2015-10-09
+ * \date          2015-10-10
+ * \updates       2015-10-10
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
- *    This application provides unit tests for the click module of the
+ *    This application provides unit tests for the keystroke module of the
  *    libseq64 library.
  *
- * Group:   1     "seq64::click"
+ * Group:   1     "seq64::keystroke"
  * Cases:
  *
  *    -# Default constructor and smoke test.
@@ -19,23 +19,22 @@
  *    -# Principal assignment operator.
  *    -# All the accessors, indirectly:
  *       -  is_press()
- *       -  is_left(), is_middle(), is_right()
- *       -  x() and y()
+ *       -  key()
  *       -  modifier(), mod_control(), mod_control_shift(), and mod_super()
  */
 
-#include "click.hpp"                   /* seq64::click class                  */
-#include "click_helpers.hpp"           /* formerly static test functions      */
-#include "click_unit_test.hpp"
+#include "keystroke.hpp"                   /* seq64::keystroke class                  */
+#include "keystroke_helpers.hpp"           /* formerly static test functions      */
+#include "keystroke_unit_test.hpp"
 
 /**
- *    Provides a basic "smoke test" for the click module.  A smoke test is a
+ *    Provides a basic "smoke test" for the keystroke module.  A smoke test is a
  *    test of the basic functionality of the object or function.  It is an
  *    easy test that makes sure the code has basic integrity.  This test is
  *    about the simplest unit test function that can be written.
  *
  * \group
- *    1. seq64::click
+ *    1. seq64::keystroke
  *
  * \case
  *    1. Basic smoke test.
@@ -47,7 +46,7 @@
  *    or that the test is not allowed to run.
  *
  * \tests
- *    -  seq64::click::click()
+ *    -  seq64::keystroke::keystroke()
  *
  * \param options
  *    Provides the command-line options for the unit-test application.
@@ -57,9 +56,9 @@
  */
 
 xpc::cut_status
-click_unit_test_01_01 (const xpc::cut_options & options)
+keystroke_unit_test_01_01 (const xpc::cut_options & options)
 {
-   xpc::cut_status status(options, 1, 1, "seq64::click", _("Smoke Test"));
+   xpc::cut_status status(options, 1, 1, "seq64::keystroke", _("Smoke Test"));
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
    {
@@ -69,10 +68,10 @@ click_unit_test_01_01 (const xpc::cut_options & options)
       }
       else
       {
-         if (status.next_subtest("click::click()"))
+         if (status.next_subtest("keystroke::keystroke()"))
          {
-            seq64::click c;
-            ok = check_click(c);                   /* checks default values   */
+            seq64::keystroke k;
+            ok = check_keystroke(k);               /* checks default values   */
             status.pass(ok);
          }
       }
@@ -82,13 +81,13 @@ click_unit_test_01_01 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::click
+ *    1. seq64::keystroke
  *
  * \case
  *    2. Principal constructor
  *
  * \tests
- *    -  seq64::click::click(int parameters)
+ *    -  seq64::keystroke::keystroke(int parameters)
  *
  * \param options
  *    Provides the command-line options for the unit-test application.
@@ -98,11 +97,11 @@ click_unit_test_01_01 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-click_unit_test_01_02 (const xpc::cut_options & options)
+keystroke_unit_test_01_02 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 2, "seq64::click", _("Principal constructor")
+      options, 1, 2, "seq64::keystroke", _("Principal constructor")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
@@ -113,9 +112,9 @@ click_unit_test_01_02 (const xpc::cut_options & options)
       }
       else
       {
-         if (status.next_subtest("click::click()"))
+         if (status.next_subtest("keystroke::keystroke()"))
          {
-            ok = click_ctor_tests();
+            ok = keystroke_ctor_tests();
             status.pass(ok);
          }
       }
@@ -125,13 +124,13 @@ click_unit_test_01_02 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::click
+ *    1. seq64::keystroke
  *
  * \case
  *    3. Copy constructor
  *
  * \tests
- *    -  seq64::click::click(click)
+ *    -  seq64::keystroke::keystroke(keystroke)
  *
  * \param options
  *    Provides the command-line options for the unit-test application.
@@ -141,11 +140,11 @@ click_unit_test_01_02 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-click_unit_test_01_03 (const xpc::cut_options & options)
+keystroke_unit_test_01_03 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 3, "seq64::click", _("Copy constructor")
+      options, 1, 3, "seq64::keystroke", _("Copy constructor")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
@@ -158,37 +157,37 @@ click_unit_test_01_03 (const xpc::cut_options & options)
       {
          if (status.next_subtest("Default"))
          {
-            seq64::click c1;
-            seq64::click c2;
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2;
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("Copy default"))
          {
-            seq64::click c1;
-            seq64::click c2(c1);
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2(k1);
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("Assign default"))
          {
-            seq64::click c1;
-            seq64::click c2;
-            c2 = c1;
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2;
+            k2 = k1;
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("operator =()"))
          {
-            seq64::click c1;
-            seq64::click c2;
-            (void) c2.operator =(c1);
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2;
+            (void) k2.operator =(k1);
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("Copy principal"))
          {
-            ok = click_ctor_tests(CTOR_COPY_CONSTRUCTOR);
+            ok = keystroke_ctor_tests(CTOR_COPY_CONSTRUCTOR);
             status.pass(ok);
          }
       }
@@ -198,13 +197,13 @@ click_unit_test_01_03 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::click
+ *    1. seq64::keystroke
  *
  * \case
  *    4. Principal assignment operator
  *
  * \tests
- *    -  seq64::click::operator =(click)
+ *    -  seq64::keystroke::operator =(keystroke)
  *
  * \param options
  *    Provides the command-line options for the unit-test application.
@@ -214,11 +213,11 @@ click_unit_test_01_03 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-click_unit_test_01_04 (const xpc::cut_options & options)
+keystroke_unit_test_01_04 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 4, "seq64::click", _("Principal assignment operator")
+      options, 1, 4, "seq64::keystroke", _("Principal assignment operator")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
@@ -231,23 +230,23 @@ click_unit_test_01_04 (const xpc::cut_options & options)
       {
          if (status.next_subtest("Assign default"))
          {
-            seq64::click c1;
-            seq64::click c2;
-            c2 = c1;
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2;
+            k2 = k1;
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("operator =()"))
          {
-            seq64::click c1;
-            seq64::click c2;
-            (void) c2.operator =(c1);
-            ok = compare_clicks(c1, c2);
+            seq64::keystroke k1;
+            seq64::keystroke k2;
+            (void) k2.operator =(k1);
+            ok = compare_keystrokes(k1, k2);
             status.pass(ok);
          }
          if (status.next_subtest("Assign principal"))
          {
-            ok = click_ctor_tests(CTOR_PRINCIPAL_ASSIGNMENT_OPERATOR);
+            ok = keystroke_ctor_tests(CTOR_PRINCIPAL_ASSIGNMENT_OPERATOR);
             status.pass(ok);
          }
       }
@@ -256,7 +255,7 @@ click_unit_test_01_04 (const xpc::cut_options & options)
 }
 
 /*
- * click_unit_test.cpp
+ * keystroke_unit_test.cpp
  *
  * vim: ts=3 sw=3 et ft=cpp
  */

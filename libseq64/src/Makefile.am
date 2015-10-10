@@ -6,7 +6,7 @@
 # \library    	libseq64 test
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-09
+# \update      2015-10-10
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -78,7 +78,7 @@ libseq64_file = $(libseq64_libdir)/libseq64.la
 
 .PHONY: $(libseq64_file)
 
-dependencies = $(libseq64_file)
+dependencies = $(libseq64_file) # $(XPCCUTPP_LIBS) $(XPCCUT_LIBS)
 
 #*****************************************************************************
 # libtool
@@ -133,6 +133,9 @@ noinst_PROGRAMS = libseq64_unit_test
 libseq64_unit_test_SOURCES = \
  click_helpers.cpp \
  click_unit_test.cpp \
+ common_helpers.cpp \
+ keystroke_helpers.cpp \
+ keystroke_unit_test.cpp \
  libseq64_unit_test.cpp
 
 # -lpthread $(libraries)
@@ -145,7 +148,7 @@ libseq64_unit_test_LDADD = \
  $(JACK_LIBS) \
  $(LASH_LIBS)
 
-# libseq64_unit_test_DEPENDENCIES = $(dependencies)
+libseq64_unit_test_DEPENDENCIES = $(dependencies)
 
 #****************************************************************************
 # TESTS

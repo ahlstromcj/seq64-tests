@@ -1,12 +1,12 @@
 #******************************************************************************
-# Makefile.am (libseq64)
+# Makefile.am (seq64-tests)
 #------------------------------------------------------------------------------
 ##
 # \file       	Makefile.am
 # \library    	libseq64 library
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-09
+# \update      2015-10-10
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -43,7 +43,9 @@ VERSION = @VERSION@
 
 pkginclude_HEADERS = \
  click_helpers.hpp \
- click_unit_test.hpp
+ click_unit_test.hpp \
+ common_helpers.hpp \
+ keystroke_helpers.hpp
 
 #******************************************************************************
 # uninstall-hook
@@ -53,7 +55,7 @@ uninstall-hook:
 	@echo "Note:  you may want to remove $(pkgincludedir) manually"
 
 #******************************************************************************
-# Makefile.am (libseq64)
+# Makefile.am (seq64-tests)
 #------------------------------------------------------------------------------
 # 	vim: ts=3 sw=3 ft=automake
 #------------------------------------------------------------------------------

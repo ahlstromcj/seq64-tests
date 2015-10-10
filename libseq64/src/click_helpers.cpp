@@ -3,18 +3,18 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-09
- * \updates       2015-10-09
+ * \updates       2015-10-10
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
- *    This application provides helper functions for the unit tests of
+ *    This module provides helper functions for the unit tests of
  *    the click module of the libseq64 library.
  */
 
 #include <string>
 
 #include "click.hpp"                   /* seq64::click class                  */
-#include "click_helpers.hpp"           /* click_test_t and functions          */
+#include "click_helpers.hpp"           /* constructor_test_t and functions    */
 
 /**
  *    Check the given click and test it against the given (and expected)
@@ -195,49 +195,13 @@ int s_y_list [] =
 int s_y_list_size = sizeof(s_y_list) / sizeof(int);
 
 /**
- *    Provides a list of click modifier-values to test; the full range is a
- *    bit much.
- */
-
-seq64::seq_modifier_t s_mod_list [] =
-{
-    seq64::SEQ64_NO_MASK,
-    seq64::SEQ64_SHIFT_MASK,
-    seq64::SEQ64_LOCK_MASK,
-    seq64::SEQ64_CONTROL_MASK,
-    seq64::seq_modifier_t(seq64::SEQ64_CONTROL_MASK | seq64::SEQ64_SHIFT_MASK),
-    seq64::SEQ64_MOD1_MASK,
-    seq64::SEQ64_MOD2_MASK,
-    seq64::SEQ64_MOD3_MASK,
-    seq64::SEQ64_MOD4_MASK,
-    seq64::SEQ64_MOD5_MASK,
-    seq64::SEQ64_BUTTON1_MASK,
-    seq64::SEQ64_BUTTON2_MASK,
-    seq64::SEQ64_BUTTON3_MASK,
-    seq64::SEQ64_BUTTON4_MASK,
-    seq64::SEQ64_BUTTON5_MASK,
-
-    /*
-    * Bits 13 and 14 are used by XKB, bits 15 to 25 are unused. Bit 29 is
-    * used internally.
-    */
-
-    seq64::SEQ64_SUPER_MASK,
-    seq64::SEQ64_HYPER_MASK,
-    seq64::SEQ64_META_MASK,
-    seq64::SEQ64_RELEASE_MASK,
-    seq64::SEQ64_MASK_MAX
-};
-int s_mod_list_size = sizeof(s_mod_list) / sizeof(seq64::seq_modifier_t);
-
-/**
  *    Passes a wide range of parameters to the principal constructor, copy
  *    constructor, and principle assignment operator for a complete-enough
  *    test of these functions.
  */
 
 bool
-click_ctor_tests (click_test_t testitem)
+click_ctor_tests (constructor_test_t testitem)
 {
    bool result;
    for (int xi = 0; xi < s_x_list_size; ++xi)
@@ -254,26 +218,26 @@ click_ctor_tests (click_test_t testitem)
             for (int i = 0; i <= 1; ++i)
             {
                bool press = i == 1;
-               for (int m = 0; m < s_mod_list_size; ++m)
+               for (int m = 0; m < key_mod_list_size(); ++m)
                {
                   int x = s_x_list[xi];
                   int y = s_y_list[yi];
-                  seq64::seq_modifier_t smt = s_mod_list[m];
+                  seq64::seq_modifier_t smt = key_mod(m);
                   seq64::click c(x, y, button, press, smt);
-                  if (testitem == CT_PRINCIPAL_CONSTRUCTOR)
+                  if (testitem == CTOR_PRINCIPAL_CONSTRUCTOR)
                      result = check_click(c, x, y, button, press, smt);
-                  else if (testitem == CT_COPY_CONSTRUCTOR)
+                  else if (testitem == CTOR_COPY_CONSTRUCTOR)
                   {
                      seq64::click c2(c);                    /* copy object    */
                      result = compare_clicks(c, c2, x, y, button, press, smt);
                   }
-                  else if (testitem == CT_PRINCIPAL_ASSIGNMENT_OPERATOR)
+                  else if (testitem == CTOR_PRINCIPAL_ASSIGNMENT_OPERATOR)
                   {
                      seq64::click c2;
+
                      /*
                       * Make sure the compiler doesn't "optimize" assignment
-                      * into a copy constructor, unlikely though that may
-                      * be.
+                      * into a copy constructor, unlikely though that may be.
                       */
 
                      (void) c2.operator =(c);
