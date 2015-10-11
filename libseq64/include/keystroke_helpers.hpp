@@ -1,5 +1,5 @@
-#ifndef XPCCUTPP_KEYSTROKE_HELPERS
-#define XPCCUTPP_KEYSTROKE_HELPERS
+#ifndef XPCCUTPP_KEYSTROKE_HELPERS_HPP
+#define XPCCUTPP_KEYSTROKE_HELPERS_HPP
 
 /**
  * \file          keystroke_helpers.hpp
@@ -45,7 +45,7 @@ extern bool keystroke_ctor_tests
    constructor_test_t testitem = CTOR_PRINCIPAL_CONSTRUCTOR
 );
 
-#endif         // XPCCUTPP_KEYSTROKE_HELPERS
+#endif         // XPCCUTPP_KEYSTROKE_HELPERS_HPP
 
 /*
  * keystroke_helpers.hpp

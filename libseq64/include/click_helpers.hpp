@@ -1,5 +1,5 @@
-#ifndef XPCCUTPP_CLICK_HELPERS
-#define XPCCUTPP_CLICK_HELPERS
+#ifndef XPCCUTPP_CLICK_HELPERS_HPP
+#define XPCCUTPP_CLICK_HELPERS_HPP
 
 /**
  * \file          click_helpers.hpp
@@ -49,7 +49,7 @@ extern bool click_ctor_tests
    constructor_test_t testitem = CTOR_PRINCIPAL_CONSTRUCTOR
 );
 
-#endif         // XPCCUTPP_CLICK_HELPERS
+#endif         // XPCCUTPP_CLICK_HELPERS_HPP
 
 /*
  * click_helpers.hpp

@@ -1,5 +1,5 @@
-#ifndef KEYSTROKE_UNIT_TEST_HPP
-#define KEYSTROKE_UNIT_TEST_HPP
+#ifndef XPCCUTPP_KEYSTROKE_UNIT_TEST_HPP
+#define XPCCUTPP_KEYSTROKE_UNIT_TEST_HPP
 
 /**
  * \file          keystroke_unit_test.hpp
@@ -33,7 +33,7 @@ extern xpc::cut_status keystroke_unit_test_01_04
    const xpc::cut_options & options
 );
 
-#endif   // KEYSTROKE_UNIT_TEST_HPP
+#endif   // XPCCUTPP_KEYSTROKE_UNIT_TEST_HPP
 
 /*
  * keystroke_unit_test.hpp

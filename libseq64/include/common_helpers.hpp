@@ -1,5 +1,5 @@
-#ifndef XPCCUTPP_COMMON_HELPERS
-#define XPCCUTPP_COMMON_HELPERS
+#ifndef XPCCUTPP_COMMON_HELPERS_HPP
+#define XPCCUTPP_COMMON_HELPERS_HPP
 
 /**
  * \file          common_helpers.hpp
@@ -36,7 +36,7 @@ enum constructor_test_t
 extern seq64::seq_modifier_t key_mod (int index);
 extern int key_mod_list_size ();
 
-#endif         // XPCCUTPP_COMMON_HELPERS
+#endif         // XPCCUTPP_COMMON_HELPERS_HPP
 
 /*
  * common_helpers.hpp

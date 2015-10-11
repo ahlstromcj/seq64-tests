@@ -1,5 +1,5 @@
-#ifndef CLICK_UNIT_TEST_HPP
-#define CLICK_UNIT_TEST_HPP
+#ifndef XPCCUTPP_CLICK_UNIT_TEST_HPP
+#define XPCCUTPP_CLICK_UNIT_TEST_HPP
 
 /**
  * \file          click_unit_test.hpp
@@ -21,7 +21,7 @@ extern xpc::cut_status click_unit_test_01_02 (const xpc::cut_options & options);
 extern xpc::cut_status click_unit_test_01_03 (const xpc::cut_options & options);
 extern xpc::cut_status click_unit_test_01_04 (const xpc::cut_options & options);
 
-#endif   // CLICK_UNIT_TEST_HPP
+#endif   // XPCCUTPP_CLICK_UNIT_TEST_HPP
 
 /*
  * click_unit_test.hpp
