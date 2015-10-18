@@ -15,6 +15,7 @@
 
 #include <string>
 
+#include "gui_assistant_dummy.hpp"     /* qui_assistant_dummy stubby class    */
 #include "midifile.hpp"                /* seq64::midifile class               */
 #include "midifile_helpers.hpp"        /* constructor_test_t and functions    */
 #include "perform.hpp"                 /* seq64::perform                      */
@@ -24,14 +25,14 @@
  *    mainwnd::open_file() does.
  */
 
-bool
+static bool
 parse_midi_file
 (
    seq64::perform & perf,
    const std::string & filename,
-   int screenset,
-   int ppqn,
-   bool propformat
+   int screenset     = 0,
+   int ppqn          = SEQ64_USE_DEFAULT_PPQN,
+   bool propformat   = true
 )
 {
    seq64::midifile f(filename, ppqn, propformat);
@@ -40,6 +41,21 @@ parse_midi_file
    if (result)
       ppqn = f.ppqn();
 
+   return result;
+}
+
+/**
+ *    Exercises the midifile.  It creates a perform object much like the
+ *    sequencer64.cpp's main() function does, then calls
+ *    seq64::midifile::parse().
+ */
+
+bool
+midifile_parse_test (const std::string & filename)
+{
+   gui_assistant_dummy g;
+   seq64::perform p(g);
+   bool result = parse_midi_file(p, filename);
    return result;
 }
 

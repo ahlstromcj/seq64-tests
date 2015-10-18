@@ -6,7 +6,7 @@
 # \library    	libseq64 library
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-17
+# \update      2015-10-18
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -45,8 +45,11 @@ pkginclude_HEADERS = \
  click_helpers.hpp \
  click_unit_test.hpp \
  common_helpers.hpp \
+ gui_assistant_dummy.hpp \
  keystroke_helpers.hpp \
- midifile_helpers.hpp
+ keystroke_unit_test.hpp \
+ midifile_helpers.hpp \
+ midifile_unit_test.hpp
 
 #******************************************************************************
 # uninstall-hook

@@ -134,10 +134,12 @@ libseq64_unit_test_SOURCES = \
  click_helpers.cpp \
  click_unit_test.cpp \
  common_helpers.cpp \
+ gui_assistant_dummy.cpp \
  keystroke_helpers.cpp \
  keystroke_unit_test.cpp \
  libseq64_unit_test.cpp \
- midifile_helpers.cpp
+ midifile_helpers.cpp \
+ midifile_unit_test.cpp
 
 # -lpthread $(libraries)
 

@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-06
- * \updates       2015-10-10
+ * \updates       2015-10-18
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -13,6 +13,7 @@
 
 #include "click_unit_test.hpp"
 #include "keystroke_unit_test.hpp"
+#include "midifile_unit_test.hpp"
 
 /**
  *    This is the main routine for the libseq64_unit_test application.
@@ -31,8 +32,8 @@
  *
  */
 
-#define SEQ64_APP_NAME           "Sequencer64 library libseq64"
-#define SEQ64_TEST_NAME          "libseq64_unit_test"
+#define SEQ64_APP_NAME           "Sequencer64 libseq64"
+#define SEQ64_TEST_NAME          "libseq64_unit_test 2015-10-18"
 #define SEQ64_TEST_VERSION       1.1.2
 #define DEFAULT_AUTHOR           "Chris Ahlstrom"
 
@@ -92,13 +93,19 @@ SEQ64_TEST_NAME "-specific options:\n"
          if (ok) ok = testbattery.load(click_unit_test_01_04);
 
          /*
-          * Unit tests for the click module/group/class:
+          * Unit tests for the keystroke module/group/class:
           */
 
          if (ok) ok = testbattery.load(keystroke_unit_test_01_01);
          if (ok) ok = testbattery.load(keystroke_unit_test_01_02);
          if (ok) ok = testbattery.load(keystroke_unit_test_01_03);
          if (ok) ok = testbattery.load(keystroke_unit_test_01_04);
+
+         /*
+          * Unit tests for the midifile module/group/class:
+          */
+
+         if (ok) ok = testbattery.load(midifile_unit_test_01_01);
       }
       if (ok)
          ok = testbattery.run();
