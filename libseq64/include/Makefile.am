@@ -6,12 +6,12 @@
 # \library    	libseq64 library
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-10
+# \update      2015-10-17
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
 # 		This module provides an Automake makefile for the sequencer26 C/C++
-# 		test.
+# 		tests.
 #
 #------------------------------------------------------------------------------
 
@@ -45,7 +45,8 @@ pkginclude_HEADERS = \
  click_helpers.hpp \
  click_unit_test.hpp \
  common_helpers.hpp \
- keystroke_helpers.hpp
+ keystroke_helpers.hpp \
+ midifile_helpers.hpp
 
 #******************************************************************************
 # uninstall-hook

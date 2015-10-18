@@ -6,7 +6,7 @@
 # \library    	libseq64 test
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-10-10
+# \update      2015-10-18
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -136,7 +136,8 @@ libseq64_unit_test_SOURCES = \
  common_helpers.cpp \
  keystroke_helpers.cpp \
  keystroke_unit_test.cpp \
- libseq64_unit_test.cpp
+ libseq64_unit_test.cpp \
+ midifile_helpers.cpp
 
 # -lpthread $(libraries)
 
