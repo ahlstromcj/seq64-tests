@@ -22,6 +22,12 @@
  */
 
 extern bool midifile_parse_test (const std::string & filename);
+extern bool midifile_dual_parse_test
+(
+   const std::string & fname1,
+   const std::string & fname2
+);
+extern bool midifile_write_test (const std::string & filename);
 
 #endif         // XPCCUTPP_MIDIFILE_HELPERS_HPP
 

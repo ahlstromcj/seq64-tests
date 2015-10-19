@@ -59,6 +59,66 @@ midifile_parse_test (const std::string & filename)
    return result;
 }
 
+/**
+ *    Exercises the midifile, for two MIDI files.  Hopefully, this will
+ *    show that a perform object can be safely cleared and re-used, and, when
+ *    run under valgrind, will show any memory leaks we should handle.
+ */
+
+bool
+midifile_dual_parse_test
+(
+   const std::string & fname1,
+   const std::string & fname2
+)
+{
+   gui_assistant_dummy g;
+   seq64::perform p(g);
+   bool result = parse_midi_file(p, fname1);
+   if (result)
+      result = parse_midi_file(p, fname2);
+
+   return result;
+}
+
+/**
+ *    Opens a MIDI file and commences a write operation very similar to what
+ *    mainwnd::save_file() does.
+ */
+
+static bool
+write_midi_file
+(
+   seq64::perform & perf,
+   const std::string & filename,
+   int ppqn          = SEQ64_USE_DEFAULT_PPQN,
+   bool propformat   = true
+)
+{
+   seq64::midifile f(filename, ppqn, propformat);
+   bool result = f.write(perf);
+   return result;
+}
+
+/**
+ *    Exercises the midifile writing.
+ */
+
+bool
+midifile_write_test (const std::string & filename)
+{
+   gui_assistant_dummy g;
+   seq64::perform p(g);
+   bool result = parse_midi_file(p, filename);
+   if (result)
+   {
+      std::string backup_filename = filename;
+      backup_filename += "-bak";
+      result = write_midi_file(p, backup_filename, 192 /* ppqn */);
+   }
+   return result;
+}
+
 /*
  * midifile_helpers.cpp
  *

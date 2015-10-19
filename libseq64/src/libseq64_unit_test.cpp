@@ -33,7 +33,7 @@
  */
 
 #define SEQ64_APP_NAME           "Sequencer64 libseq64"
-#define SEQ64_TEST_NAME          "libseq64_unit_test 2015-10-18"
+#define SEQ64_TEST_NAME          "libseq64_unit_test"
 #define SEQ64_TEST_VERSION       1.1.2
 #define DEFAULT_AUTHOR           "Chris Ahlstrom"
 
@@ -106,6 +106,7 @@ SEQ64_TEST_NAME "-specific options:\n"
           */
 
          if (ok) ok = testbattery.load(midifile_unit_test_01_01);
+         if (ok) ok = testbattery.load(midifile_unit_test_02_01);
       }
       if (ok)
          ok = testbattery.run();

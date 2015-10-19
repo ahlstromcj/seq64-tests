@@ -20,6 +20,10 @@ extern xpc::cut_status midifile_unit_test_01_01
 (
    const xpc::cut_options & options
 );
+extern xpc::cut_status midifile_unit_test_02_01
+(
+   const xpc::cut_options & options
+);
 
 #endif   // XPCCUTPP_MIDIFILE_UNIT_TEST_HPP
 

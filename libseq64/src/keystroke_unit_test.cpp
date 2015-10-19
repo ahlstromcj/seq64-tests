@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-10
- * \updates       2015-10-10
+ * \updates       2015-10-18
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -23,18 +23,17 @@
  *       -  modifier(), mod_control(), mod_control_shift(), and mod_super()
  */
 
-#include "keystroke.hpp"                   /* seq64::keystroke class                  */
-#include "keystroke_helpers.hpp"           /* formerly static test functions      */
+#include "keystroke.hpp"               /* seq64::keystroke class              */
+#include "keystroke_helpers.hpp"       /* formerly static test functions      */
 #include "keystroke_unit_test.hpp"
 
 /**
- *    Provides a basic "smoke test" for the keystroke module.  A smoke test is a
- *    test of the basic functionality of the object or function.  It is an
+ *    Provides a basic "smoke test" for the keystroke module.  A smoke test is
+ *    a test of the basic functionality of the object or function.  It is an
  *    easy test that makes sure the code has basic integrity.  This test is
  *    about the simplest unit test function that can be written.
  *
- * \group
- *    1. seq64::keystroke
+ * \group 1. seq64::keystroke
  *
  * \case
  *    1. Basic smoke test.
