@@ -1,0 +1,260 @@
+Chris Ahlstrom
+Sequencer64 Manual Testing Steps
+2015-11-03 to 2015-11-03
+
+Annotations:
+
+   -  [d] A test derived from the documentation.
+   -  [c] A test derived from the code.
+   -  [u] A test that is suitable for a unit/regression test, or already such a
+          test.
+   -  [x] Still in limbo.
+
+First, here is a list of the library modules, and their disposition.
+For the library modules themselves, we want to depend on unit tests and
+regression test.  For GUI elements, it is difficult to conceive of
+useful unit tests, though some internal elements can still be amenable to unit
+testing.
+
+   -# ____ [x] Library Code
+      -# ____ [x] libseq4
+         -# ____ [x] click
+         -# ____ [x] configfile
+         -# ____ [x] controllers
+         -# ____ [x] easy_macros
+         -# ____ [x] event
+         -# ____ [x] event_list
+         -# ____ [x] gdk_basic_keys
+         -# ____ [x] globals
+         -# ____ [x] gui_assistant
+         -# ____ [x] gui_play_base
+         -# ____ [x] jack_assistant
+         -# ____ [x] keys_perform
+         -# ____ [x] keystroke
+         -# ____ [x] lash
+         -# ____ [x] mastermidibus
+         -# ____ [x] midibus_common
+         -# ____ [x] midibus
+         -# ____ [x] midi_container
+         -# ____ [x] midifile
+            -# ____ [x] New format reading
+            -# ____ [x] New format writing
+            -# ____ [x] Legacy format reading
+            -# ____ [x] Legacy format writing
+            -# ____ [x] Stress-test reading
+            -# ____ [x] Stress-test writing
+         -# ____ [x] midi_list
+         -# ____ [x] midi_vector
+         -# ____ [x] mutex
+         -# ____ [x] optionsfile
+            -# ____ [x] Completeness
+         -# ____ [x] perform
+         -# ____ [x] platform_macros
+         -# ____ [x] rc_settings
+         -# ____ [x] sequence
+         -# ____ [x] triggers
+         -# ____ [x] userfile
+         -# ____ [x] user_instrument
+         -# ____ [x] user_midi_bus
+         -# ____ [x] user_settings
+      -# ____ [x] seq_gtkmm2
+         -# ____ [x] font
+         -# ____ [x] fruityperfroll_input
+         -# ____ [x] fruityseq
+         -# ____ [x] fruityseqroll
+         -# ____ [x] gtk_helpers
+         -# ____ [x] gui_assistant_gtk2
+         -# ____ [x] gui_drawingarea_gtk2
+         -# ____ [x] gui_palette_gtk2
+         -# ____ [x] gui_window_gtk2
+         -# ____ [x] keybindentry
+         -# ____ [x] keys_perform_gtk2
+         -# ____ [x] maintime
+         -# ____ [x] mainwid
+         -# ____ [x] mainwnd
+         -# ____ [x] options
+         -# ____ [x] perfedit
+         -# ____ [x] perfnames
+         -# ____ [x] perfroll
+         -# ____ [x] perfroll_input
+         -# ____ [x] perftime
+         -# ____ [x] seq24seq
+         -# ____ [x] seq24seqroll
+         -# ____ [x] seqdata
+         -# ____ [x] seqedit
+         -# ____ [x] seqevent
+         -# ____ [x] seqkeys
+         -# ____ [x] seqmenu
+         -# ____ [x] seqroll
+         -# ____ [x] seqtime
+      -# ____ [x] seq_portmidi
+         -# ___ mastermidibus_portmidi.hpp
+         -# ___ midibus_portmidi.hpp
+      -# ____ [x] sequencer64
+         -# ____ [x] sequencer64 (main module)
+         -# ____ [x] command line
+
+Second, here is a list of the user-interface sections, and their disposition.
+For the library modules themselves, we have to depend upon manual testing.
+Obviously, for GUI elements, it is difficult to implement useful unit tests.
+
+   -# ____ [x] Main Window
+      -# ____ [x] Menu
+         -# ____ [x] New
+            -# ____ [x] Change detection
+            -# ____ [x] User-interface clearing
+         -# ____ [x] Open
+            -# ____ [x] Change detection
+            -# ____ [x] Illegal or missing file error support
+            -# ____ [x] Completeness of incoming data
+         -# ____ [x] Save
+            -# ____ [x] Basic operation
+            -# ____ [x] Illegal file-name error support
+         -# ____ [x] Save As
+            -# ____ [x] Basic operation
+            -# ____ [x] Illegal file-name error support
+         -# ____ [x] Import
+            -# ____ [x] Change detection
+            -# ____ [x] Illegal or missing file error support
+            -# ____ [x] Completeness of incoming data
+         -# ____ [x] Options
+            -# ____ [x] options
+            -# ____ [x] MIDI Clock
+               -# ____ [x] Off
+               -# ____ [x] On (Pos)
+               -# ____ [x] On (Mod)
+               -# ____ [x] Clock Start Modulo
+               -# ____ [x] Saving to sequencer64.rc
+               -# ____ [x] Reading from sequencer64.rc
+            -# ____ [x] MIDI Input
+               -# ____ [x] Input item
+               -# ____ [x] Input item usage
+               -# ____ [x] Saving to sequencer64.rc
+               -# ____ [x] Reading from sequencer64.rc
+            -# ____ [x] Keyboard
+               -# ____ [x] Key detection and fill-in
+               -# ____ [x] Complete modification
+               -# ____ [x] Saving to sequencer64.rc
+               -# ____ [x] Reading from sequencer64.rc
+               -# ____ [x] Cross-field interference
+            -# ____ [x] Mouse
+               -# ____ [x] Interaction method
+                  -# ____ [x] Seq24 interaction method
+                  -# ____ [x] Fruity interaction method
+                  -# ____ [x] Mod4 key support
+            -# ____ [x] JACK Sync
+               -# ____ [x] "Rc" configuration file
+               -# ____ [x] Command-line overrides
+               -# ____ [x] Transport
+                  -# ____ [x] Transport
+                  -# ____ [x] Transport Master
+                  -# ____ [x] Master Conditional
+               -# ____ [x] Start mode
+                  -# ____ [x] Live mode
+                  -# ____ [x] Song mode
+               -# ____ [x] Connect
+               -# ____ [x] Disconnect
+            -# ____ [x] ALSA [feature pending]
+         -# ____ [x] "Rc" configuration file
+         -# ____ [x] "User" configuration file
+         -# ____ [x] View
+            -# ____ [x] Song Editor
+            -# ____ [x] Ctrl-e
+         -# ____ [x] Help About
+            -# ____ [x] Basic
+            -# ____ [x] Credits
+               -# ____ [x] Written by
+               -# ____ [x] Documented by
+      -# ____ [x] Patterns Window
+         -# ____ [x] mainwid
+            -# ____ [x] Pattern slot
+               -# ____ [x] Arming
+                  -# ____ [x] Left-click
+                     -# ____ [x] Normal conditions
+                     -# ____ [x] Other conditions
+                  -# ____ [x] Hot-key
+                     -# ____ [x] Normal conditions
+                     -# ____ [x] File / Options / Keyboard setup
+                     -# ____ [x] Other conditions
+            -# ____ [x] Groups
+               -# ____ [x] Queuing
+               -# ____ [x] Group learning
+               -# ____ [x] Snapshot
+         -# ____ [x] mainwnd
+         -# ____ [x] maintime
+            -# ____ [x] Beat flashing
+            -# ____ [x] Fast pill
+            -# ____ [x] Slow pill
+   -# ____ [x] Pattern Editor
+      -# ____ [x] First row
+      -# ____ [x] Second row
+      -# ____ [x] Piano roll
+         -# ____ [x] seq24seq
+         -# ____ [x] seq24seqroll
+         -# ____ [x] seqdata
+         -# ____ [x] seqedit
+         -# ____ [x] seqevent
+         -# ____ [x] seqkeys
+         -# ____ [x] seqmenu
+         -# ____ [x] seqroll
+            -# ____ [x] Note addition ("draw mode" or "paint mode")
+               -# ____ [x] Paint: Right-hold
+                  -# ____ [x] Add a note: Left-click
+                  -# ____ [x] Add many notes: Left-click-drag
+                  -# ____ [x] While playing
+                  -# ____ [x] Sequence wrap-around
+                  -# ____ [x] Re-painting [continued left-click-drag]
+                  -# ____ [x] Exit: Release right
+                  -# ____ [x] Layering [additional left-click-drag]
+               -# ____ [x] Paint: "p" key
+                  -# ____ [x] While playing [feature pending]
+                  -# ____ [x] Exit: Shift-P
+               -# ____ [x] Paint: "Mod4" key
+                  -# ____ [x] Exit: Right-release
+            -# ____ [x] Note-selection
+               -# ____ [x] Left-click-drag
+               -# ____ [x] Left-click-deselect [feature pending]
+               -# ____ [x] Ctrl left-click select
+               -# ____ [x] Ctrl left-click deselect
+               -# ____ [x] Copy (Ctrl-C)
+               -# ____ [x] Paste (Ctrl-V) [document this feature!!!]
+                  -# ____ [x] Show selection box
+                  -# ____ [x] Move selection box
+                  -# ____ [x] Left-click paste
+                  -# ____ [x] Paste wrap-around
+                  -# ____ [x] Paste refusal (outside of pattern boundary)
+                  -# ____ [x] Paste into another sequence
+            -# ____ [x] Note-selection action
+               -# ____ [x] Selection box draw
+               -# ____ [x] Selection action icon [feature pending]
+            -# ____ [x] Note-selection movement: Left-click-drag
+               -# ____ [x] Horizontal (time)
+                  -# ____ [x] Mouse
+                  -# ____ [x] Arrow keys
+                  -# ____ [x] Wrap-around in time
+               -# ____ [x] Vertical (pitch)
+                  -# ____ [x] Mouse
+                  -# ____ [x] Arrow keys
+                  -# ____ [x] Note loss
+                     -# ____ [x] Undoable if using mouse
+                     -# ____ [x] Not undoable if using arrow keys
+               -# ____ [x] Sequence wrap-around [feature or bug?]
+            -# ____ [x] Note-selection stretch: Ctrl left-click-drag
+               -# ____ [x] Sequence wrap-around [feature or bug?]
+               -# ____ [x] Horizontal
+               -# ____ [x] Vertical [not supported]
+         -# ____ [x] seqtime
+      -# ____ [x] Bottom row
+   -# ____ [x] Song Editor
+      -# ____ [x] Top row
+      -# ____ [x] Piano roll
+               -# ____ [x] Arming
+         -# ____ [x] perfedit
+         -# ____ [x] perfnames
+         -# ____ [x] perfroll
+         -# ____ [x] perfroll_input
+         -# ____ [x] perftime
+   -# ____ [x] Fruity Interactions
+   -# ____ [x] Interactions with Yoshimi
+   
+# vim: ts=3 sw=3 et ft=sh
