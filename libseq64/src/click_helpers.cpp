@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-09
- * \updates       2015-10-10
+ * \updates       2015-11-29
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -52,7 +52,7 @@ check_click
       else
       {
          result = c.button() == button;
-         if (SEQ64_CLICK_IS_LEFT(button))
+         if (SEQ64_CLICK_LEFT(button))
          {
             result = c.is_left();
             if (result)
@@ -61,7 +61,7 @@ check_click
             if (result)
                result = ! c.is_right();
          }
-         else if (SEQ64_CLICK_IS_MIDDLE(button))
+         else if (SEQ64_CLICK_MIDDLE(button))
          {
             result = ! c.is_left();
             if (result)
@@ -70,7 +70,7 @@ check_click
             if (result)
                result = ! c.is_right();
          }
-         else if (SEQ64_CLICK_IS_RIGHT(button))
+         else if (SEQ64_CLICK_RIGHT(button))
          {
             result = ! c.is_left();
             if (result)

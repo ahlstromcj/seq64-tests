@@ -28,7 +28,7 @@
  * \library       sequencer64 application
  * \author        Chris Ahlstrom
  * \date          2015-10-18
- * \updates       2015-10-18
+ * \updates       2015-11-29
  * \license       GNU GPLv2 or above
  *
  *  Note that this module automatically creates a Gtk-specific
@@ -76,7 +76,7 @@ public:
         // Empty body
     }
 
-    virtual void lash_timeout_connect (seq64::lash & /*lashobject*/ )
+    virtual void lash_timeout_connect (seq64::lash * /*lashobject*/ )
     {
         // Empty body
     }

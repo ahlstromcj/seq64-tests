@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-18
- * \updates       2015-10-18
+ * \updates       2015-11-29
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -41,7 +41,7 @@ resources_file (const std::string & s)
  *    about the simplest unit test function that can be written.
  *
  * \group
- *    1. seq64::midifile
+ *    3. seq64::midifile
  *
  * \case
  *    1. Basic parse test.
@@ -57,9 +57,9 @@ resources_file (const std::string & s)
  */
 
 xpc::cut_status
-midifile_unit_test_01_01 (const xpc::cut_options & options)
+midifile_unit_test_03_01 (const xpc::cut_options & options)
 {
-   xpc::cut_status status(options, 1, 1, "seq64::midifile", _("Parse Test"));
+   xpc::cut_status status(options, 3, 1, "seq64::midifile", _("Parse Test"));
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
    {
@@ -96,10 +96,10 @@ midifile_unit_test_01_01 (const xpc::cut_options & options)
  *    Provides a basic "smoke test" for the midifile module.
  *
  * \group
- *    2. seq64::midifile
+ *    3. seq64::midifile
  *
  * \case
- *    1. Basic write test.
+ *    2. Basic write test.
  *
  * \tests
  *    -  seq64::midifile::midifile()
@@ -112,9 +112,9 @@ midifile_unit_test_01_01 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-midifile_unit_test_02_01 (const xpc::cut_options & options)
+midifile_unit_test_03_02 (const xpc::cut_options & options)
 {
-   xpc::cut_status status(options, 2, 1, "seq64::midifile", _("Write Test"));
+   xpc::cut_status status(options, 3, 2, "seq64::midifile", _("Write Test"));
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
    {

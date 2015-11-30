@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-10
- * \updates       2015-10-18
+ * \updates       2015-11-29
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -33,7 +33,7 @@
  *    easy test that makes sure the code has basic integrity.  This test is
  *    about the simplest unit test function that can be written.
  *
- * \group 1. seq64::keystroke
+ * \group 2. seq64::keystroke
  *
  * \case
  *    1. Basic smoke test.
@@ -55,9 +55,9 @@
  */
 
 xpc::cut_status
-keystroke_unit_test_01_01 (const xpc::cut_options & options)
+keystroke_unit_test_02_01 (const xpc::cut_options & options)
 {
-   xpc::cut_status status(options, 1, 1, "seq64::keystroke", _("Smoke Test"));
+   xpc::cut_status status(options, 2, 1, "seq64::keystroke", _("Smoke Test"));
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
    {
@@ -80,7 +80,7 @@ keystroke_unit_test_01_01 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::keystroke
+ *    2. seq64::keystroke
  *
  * \case
  *    2. Principal constructor
@@ -96,11 +96,11 @@ keystroke_unit_test_01_01 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-keystroke_unit_test_01_02 (const xpc::cut_options & options)
+keystroke_unit_test_02_02 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 2, "seq64::keystroke", _("Principal constructor")
+      options, 2, 2, "seq64::keystroke", _("Principal constructor")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
@@ -123,7 +123,7 @@ keystroke_unit_test_01_02 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::keystroke
+ *    2. seq64::keystroke
  *
  * \case
  *    3. Copy constructor
@@ -139,11 +139,11 @@ keystroke_unit_test_01_02 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-keystroke_unit_test_01_03 (const xpc::cut_options & options)
+keystroke_unit_test_02_03 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 3, "seq64::keystroke", _("Copy constructor")
+      options, 2, 3, "seq64::keystroke", _("Copy constructor")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)
@@ -196,7 +196,7 @@ keystroke_unit_test_01_03 (const xpc::cut_options & options)
 
 /**
  * \group
- *    1. seq64::keystroke
+ *    2. seq64::keystroke
  *
  * \case
  *    4. Principal assignment operator
@@ -212,11 +212,11 @@ keystroke_unit_test_01_03 (const xpc::cut_options & options)
  */
 
 xpc::cut_status
-keystroke_unit_test_01_04 (const xpc::cut_options & options)
+keystroke_unit_test_02_04 (const xpc::cut_options & options)
 {
    xpc::cut_status status
    (
-      options, 1, 4, "seq64::keystroke", _("Principal assignment operator")
+      options, 2, 4, "seq64::keystroke", _("Principal assignment operator")
    );
    bool ok = status.valid();                       /* invalidity not an error */
    if (ok)

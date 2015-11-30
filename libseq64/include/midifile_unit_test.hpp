@@ -6,7 +6,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-18
- * \updates       2015-10-18
+ * \updates       2015-11-29
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -16,11 +16,11 @@
 
 #include <xpc/cut.hpp>                 /* xpc::cut unit-test class            */
 
-extern xpc::cut_status midifile_unit_test_01_01
+extern xpc::cut_status midifile_unit_test_03_01
 (
    const xpc::cut_options & options
 );
-extern xpc::cut_status midifile_unit_test_02_01
+extern xpc::cut_status midifile_unit_test_03_02
 (
    const xpc::cut_options & options
 );
