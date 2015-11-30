@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-10-06
- * \updates       2015-11-29
+ * \updates       2015-11-30
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -114,6 +114,7 @@ SEQ64_TEST_NAME "-specific options:\n"
           */
 
          if (ok) ok = testbattery.load(calculations_unit_test_04_01);
+         if (ok) ok = testbattery.load(calculations_unit_test_04_02);
       }
       if (ok)
          ok = testbattery.run();

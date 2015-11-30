@@ -6,7 +6,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-11-29
- * \updates       2015-11-29
+ * \updates       2015-11-30
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -20,6 +20,10 @@ extern xpc::cut_status calculations_unit_test_04_01
 (
    const xpc::cut_options & options
 );
+extern xpc::cut_status calculations_unit_test_04_02
+(
+   const xpc::cut_options & options
+);
 
 #endif   // XPCCUTPP_CALCULATIONS_UNIT_TEST_HPP
 
@@ -28,3 +32,4 @@ extern xpc::cut_status calculations_unit_test_04_01
  *
  * vim: ts=3 sw=3 et ft=cpp
  */
+
