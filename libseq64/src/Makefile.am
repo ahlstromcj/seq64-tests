@@ -6,7 +6,7 @@
 # \library    	libseq64 test
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-11-29
+# \update      2015-12-01
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -131,6 +131,7 @@ noinst_PROGRAMS = libseq64_unit_test
 #----------------------------------------------------------------------------
 
 libseq64_unit_test_SOURCES = \
+ calculations_helpers.cpp \
  calculations_unit_test.cpp \
  click_helpers.cpp \
  click_unit_test.cpp \

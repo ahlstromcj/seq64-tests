@@ -6,7 +6,7 @@
 # \library    	libseq64 library
 # \author     	Chris Ahlstrom
 # \date       	2015-10-06
-# \update      2015-11-29
+# \update      2015-12-01
 # \version    	$Revision$
 # \license    	$XPC_SUITE_GPL_LICENSE$
 #
@@ -42,6 +42,7 @@ VERSION = @VERSION@
 #----------------------------------------------------------------------------
 
 pkginclude_HEADERS = \
+ calculations_helpers.hpp \
  calculations_unit_test.hpp \
  click_helpers.hpp \
  click_unit_test.hpp \

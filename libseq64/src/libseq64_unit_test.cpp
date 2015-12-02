@@ -116,6 +116,8 @@ SEQ64_TEST_NAME "-specific options:\n"
          if (ok) ok = testbattery.load(calculations_unit_test_04_01);
          if (ok) ok = testbattery.load(calculations_unit_test_04_02);
          if (ok) ok = testbattery.load(calculations_unit_test_04_03);
+         if (ok) ok = testbattery.load(calculations_unit_test_04_04);
+         if (ok) ok = testbattery.load(calculations_unit_test_04_05);
       }
       if (ok)
          ok = testbattery.run();

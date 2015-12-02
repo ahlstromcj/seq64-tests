@@ -28,6 +28,14 @@ extern xpc::cut_status calculations_unit_test_04_03
 (
    const xpc::cut_options & options
 );
+extern xpc::cut_status calculations_unit_test_04_04
+(
+   const xpc::cut_options & options
+);
+extern xpc::cut_status calculations_unit_test_04_05
+(
+   const xpc::cut_options & options
+);
 
 #endif   // XPCCUTPP_CALCULATIONS_UNIT_TEST_HPP
 
