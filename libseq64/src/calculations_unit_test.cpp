@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-11-29
- * \updates       2015-12-01
+ * \updates       2015-12-02
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -18,7 +18,6 @@
  *    -# seg64::pulses_to_timestring() [string output]
  *    -# seg64::pulses_to_midi_measures()
  *    -# seg64::pulses_to_measuresstring() [string output]
- *
  *    -# seg64::midi_measures_to_pulses()
  *    -# seg64::measurestring_to_pulses() [string input]
  */
@@ -713,6 +712,258 @@ calculations_unit_test_04_05 (const xpc::cut_options & options)
             status.pass(ok);
          }
 
+      }
+   }
+   return status;
+}
+
+/**
+ *    Tests the helper function seq64::midi_measures_to_pulses().
+ *
+ * \group
+ *    4. seq64::calculations (module)
+ *
+ * \case
+ *    6. seq64::timestring_to_pulses()
+ *
+ * \tests
+ *    -  BPM = 120, PPQN = 192
+ *       -  seq64::midi_measures_to_pulses("0:0:0"))
+ *       -  seq64::midi_measures_to_pulses("0:0:0.0"))
+ *       -  seq64::midi_measures_to_pulses("100:04:10"))
+ *       -  seq64::midi_measures_to_pulses("100:04:10.0123"))
+ *
+ * \param options
+ *    Provides the command-line options for the unit-test application.
+ *
+ * \return
+ *    Returns the unit-test status object needed by the protocol.
+ */
+
+xpc::cut_status
+calculations_unit_test_04_06 (const xpc::cut_options & options)
+{
+   xpc::cut_status status
+   (
+      options, 4, 6, "seq64::calculations", "midi_measures_to_pulses()"
+   );
+   bool ok = status.valid();                       /* invalidity not an error */
+   if (ok)
+   {
+      if (! status.can_proceed())                  /* is test allowed to run? */
+      {
+         status.pass();                            /* no, force it to pass    */
+      }
+      else
+      {
+         int P = 192;                           /* PPQN                    */
+         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
+         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
+         mtt.mt_beats_per_measure = 4;
+         mtt.mt_beat_width = 4;
+         mtt.mt_ppqn = P;
+
+         seq64::midi_measures_t test;           /* tailored for each test  */
+         test.mm_measures = 0;                  /* but it's re 1, not 0    */
+         test.mm_beats = 0;                     /* but it's re 1, not 0    */
+         test.mm_divisions = 0;                 /* but it's re 0, not 1    */
+         if (status.next_subtest("0:0:0"))
+         {
+            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt, true);
+            status.pass(ok);
+         }
+         if (status.next_subtest("1:1:0"))
+         {
+            test.mm_measures = 1;
+            test.mm_beats = 1;
+            test.mm_divisions = 0;
+            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt);
+            status.pass(ok);
+         }
+         if (status.next_subtest("100:04:10"))
+         {
+            /*
+             * Result should be (100 * 3600 + 4 * 60 + 10) * 1000000
+             * microseconds, which is then multiplied by (120 * 192) and
+             * divided by (60 * 1000000).
+             */
+
+            test.mm_measures = 100;
+            test.mm_beats = 4;
+            test.mm_divisions = 10;
+            bool ok = midi_measures_to_pulses_test(options, test, 138336000, mtt);
+            status.pass(ok);
+         }
+         if (status.next_subtest("TODO"))
+         {
+            // TODO
+            status.pass();
+         }
+
+         /*
+          * Now up the PPQN by a factor of 5, and re-do the tests.
+          */
+
+         P = 192 * 5;                     /* 960 PPQN */
+         mtt.mt_ppqn = P;
+         test.mm_measures = 0;
+         test.mm_beats = 0;
+         test.mm_divisions = 0;
+         if (status.next_subtest("0:0:0"))
+         {
+            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt, true);
+            status.pass(ok);
+         }
+         if (status.next_subtest("1:1:0"))
+         {
+            test.mm_measures = 1;
+            test.mm_beats = 1;
+            test.mm_divisions = 0;
+            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt);
+            status.pass(ok);
+         }
+         if (status.next_subtest("100:04:10"))
+         {
+            /*
+             * Result should be (100 * 3600 + 4 * 60 + 10) * 1000000
+             * microseconds, which is then multiplied by (120 * 192) and
+             * divided by (60 * 1000000).
+             */
+
+            test.mm_measures = 100;
+            test.mm_beats = 4;
+            test.mm_divisions = 10;
+            bool ok = midi_measures_to_pulses_test
+            (
+               options, test, 5 * 138336000, mtt
+            );
+            status.pass(ok);
+         }
+         // test = "100:04:10.0124";
+         if (status.next_subtest("TODO"))
+         {
+            // TODO
+            status.pass();
+         }
+      }
+   }
+   return status;
+}
+
+/**
+ *    Tests the helper function seq64::measurestring_to_pulses().
+ *
+ * \group
+ *    4. seq64::calculations (module)
+ *
+ * \case
+ *    7. seq64::measurestring_to_pulses()
+ *
+ * \tests
+ *    -  BPM = 120, PPQN = 192
+ *       -  seq64::measurestring_to_pulses("0:0:0"))
+ *       -  seq64::measurestring_to_pulses("1:1:0"))
+ *       -  seq64::measurestring_to_pulses("100:04:10"))
+ *       -  seq64::measurestring_to_pulses("100:04:10.0123"))
+ *
+ * \param options
+ *    Provides the command-line options for the unit-test application.
+ *
+ * \return
+ *    Returns the unit-test status object needed by the protocol.
+ */
+
+xpc::cut_status
+calculations_unit_test_04_07 (const xpc::cut_options & options)
+{
+   xpc::cut_status status
+   (
+      options, 4, 7, "seq64::calculations", "measurestring_to_pulses()"
+   );
+   bool ok = status.valid();                       /* invalidity not an error */
+   if (ok)
+   {
+      if (! status.can_proceed())                  /* is test allowed to run? */
+      {
+         status.pass();                            /* no, force it to pass    */
+      }
+      else
+      {
+         int P = 192;
+         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
+         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
+         mtt.mt_beats_per_measure = 4;
+         mtt.mt_beat_width = 4;
+         mtt.mt_ppqn = P;
+         std::string test = "0:0:0";            /* kind of a smoke test    */
+         if (status.next_subtest(test))
+         {
+            bool ok = measurestring_to_pulses_test(options, test, 0, mtt, true);
+            status.pass(ok);
+         }
+         test = "1:1:0";                        /* less smokey smoke test  */
+         if (status.next_subtest(test))
+         {
+            bool ok = measurestring_to_pulses_test(options, test, 0, mtt);
+            status.pass(ok);
+         }
+         test = "100:04:10";
+         if (status.next_subtest(test))
+         {
+            /*
+             * Result should be ...
+             */
+
+            bool ok = measurestring_to_pulses_test
+            (
+               options, test, 0 /* TODO */ , mtt
+            );
+            status.pass(ok);
+         }
+         test = "100:04:10.0124";
+         if (status.next_subtest(test))
+         {
+            // TODO
+            status.pass();
+         }
+
+         /*
+          * Now up the PPQN by a factor of 5, and re-do the tests.
+          */
+
+         P = 192 * 5;                     /* 960 PPQN */
+         mtt.mt_ppqn = P;
+         test = "0:0:0";
+         if (status.next_subtest(test))
+         {
+            bool ok = measurestring_to_pulses_test(options, test, 0, mtt, true);
+            status.pass(ok);
+         }
+         test = "1:1:0";                        /* less smokey smoke test  */
+         if (status.next_subtest(test))
+         {
+            bool ok = measurestring_to_pulses_test(options, test, 0, mtt);
+            status.pass(ok);
+         }
+         test = "100:04:10";
+         if (status.next_subtest(test))
+         {
+            /*
+             * Result should be ...
+             */
+
+            bool ok = measurestring_to_pulses_test
+            (
+               options, test, 5 * 0 /* TODO */ , mtt
+            );
+            status.pass(ok);
+         }
+         test = "100:04:10.0124";
+         if (status.next_subtest(test))
+         {
+            // TODO
+            status.pass();
+         }
       }
    }
    return status;

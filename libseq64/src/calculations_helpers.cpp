@@ -3,12 +3,17 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-12-01
- * \updates       2015-12-01
+ * \updates       2015-12-02
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
  *    This application provides helper functions for the calculations module of
  *    the libseq64 library.
+ *
+ *    We could leverage these tests better by making the complementary test at
+ *    the same time.  Save a lot of code.  Also need super-tests that
+ *    comprehensively survey the BPM, PPQN, W (beat-width), B (beats/measure)
+ *    parameter space.
  */
 
 #include <iostream>                    /* std::cout, std::endl             */
@@ -138,7 +143,6 @@ pulses_to_midi_measures_test
             << std::endl
             ;
       }
-
       std::cout
          << "Source = " << test << " pulses --> '"
          << results.mm_measures << ":"
@@ -187,7 +191,6 @@ pulses_to_measurestring_test
             << std::endl
             ;
       }
-
       std::cout
          << "Source = " << test << " pulses --> '"
          << ms << "' MIDI measures:beats:divisions"
@@ -197,6 +200,83 @@ pulses_to_measurestring_test
    if (result)
       result = ms == target;
 
+   return result;
+}
+
+/**
+ * Helper function to run a test of seq64::midi_measures_to_pulses().
+ */
+
+bool
+midi_measures_to_pulses_test
+(
+   const xpc::cut_options & options,
+   const seq64::midi_measures_t & test,
+   seq64::midipulse target,
+   const seq64::midi_timing_t & mtt,
+   bool show_settings
+)
+{
+   seq64::midipulse p = seq64::midi_measures_to_pulses(test, mtt);
+   bool result = p == target;
+   if (options.is_verbose())
+   {
+      if (show_settings)
+      {
+         std::cout
+            << "PPQN = " << mtt.mt_ppqn
+            << "; beats/minute = " << mtt.mt_beats_per_minute
+            << "; beats/measure = " << mtt.mt_beats_per_measure
+            << "; beat width = " << mtt.mt_beat_width
+            << std::endl
+            ;
+      }
+      std::cout
+         << "Source = "
+         << test.mm_measures << ":"
+         << test.mm_beats << ":"
+         << test.mm_divisions << " MIDI measures:beats:divisions -->"
+         << p << " pulses"
+         << std::endl
+         ;
+   }
+   return result;
+}
+
+/**
+ * Helper function to run a test of seq64::measurestring_to_pulses().
+ */
+
+bool
+measurestring_to_pulses_test
+(
+   const xpc::cut_options & options,
+   const std::string & test,
+   seq64::midipulse target,
+   const seq64::midi_timing_t & mtt,
+   bool show_settings
+)
+{
+   seq64::midipulse p = seq64::measurestring_to_pulses(test, mtt);
+   bool result = p == target;
+   if (options.is_verbose())
+   {
+      if (show_settings)
+      {
+         std::cout
+            << "PPQN = " << mtt.mt_ppqn
+            << "; beats/minute = " << mtt.mt_beats_per_minute
+            << "; beats/measure = " << mtt.mt_beats_per_measure
+            << "; beat width = " << mtt.mt_beat_width
+            << std::endl
+            ;
+      }
+      std::cout
+         << "Source = '" << test << "' MIDI measures:beats:divisions -->"
+         << p << " pulses"
+         << std::endl
+         ;
+   }
    return result;
 }
 

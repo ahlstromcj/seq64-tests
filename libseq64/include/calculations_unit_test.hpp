@@ -6,7 +6,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-11-29
- * \updates       2015-12-01
+ * \updates       2015-12-02
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -33,6 +33,14 @@ extern xpc::cut_status calculations_unit_test_04_04
    const xpc::cut_options & options
 );
 extern xpc::cut_status calculations_unit_test_04_05
+(
+   const xpc::cut_options & options
+);
+extern xpc::cut_status calculations_unit_test_04_06
+(
+   const xpc::cut_options & options
+);
+extern xpc::cut_status calculations_unit_test_04_07
 (
    const xpc::cut_options & options
 );

@@ -6,7 +6,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-12-01
- * \updates       2015-12-01
+ * \updates       2015-12-02
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -53,6 +53,22 @@ extern bool pulses_to_measurestring_test
    const xpc::cut_options & options,
    seq64::midipulse test,
    const std::string & target,
+   const seq64::midi_timing_t & mtt,
+   bool show_settings = false
+);
+extern bool midi_measures_to_pulses_test
+(
+   const xpc::cut_options & options,
+   const seq64::midi_measures_t & test,
+   seq64::midipulse target,
+   const seq64::midi_timing_t & mtt,
+   bool show_settings = false
+);
+extern bool measurestring_to_pulses_test
+(
+   const xpc::cut_options & options,
+   const std::string & test,
+   seq64::midipulse target,
    const seq64::midi_timing_t & mtt,
    bool show_settings = false
 );
