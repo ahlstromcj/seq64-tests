@@ -769,7 +769,10 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          test.mm_divisions = 0;                 /* but it's re 0, not 1    */
          if (status.next_subtest("0:0:0"))
          {
-            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt, true);
+            bool ok = midi_measures_to_pulses_test
+            (
+               options, test, SEQ64_ILLEGAL_PULSE, mtt, true
+            );
             status.pass(ok);
          }
          if (status.next_subtest("1:1:0"))
@@ -783,21 +786,14 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          if (status.next_subtest("100:04:10"))
          {
             /*
-             * Result should be (100 * 3600 + 4 * 60 + 10) * 1000000
-             * microseconds, which is then multiplied by (120 * 192) and
-             * divided by (60 * 1000000).
+             * Result should be 99 * 4 * 192 + 3 * 192 + 10 = 76618
              */
 
             test.mm_measures = 100;
             test.mm_beats = 4;
             test.mm_divisions = 10;
-            bool ok = midi_measures_to_pulses_test(options, test, 138336000, mtt);
+            bool ok = midi_measures_to_pulses_test(options, test, 76618, mtt);
             status.pass(ok);
-         }
-         if (status.next_subtest("TODO"))
-         {
-            // TODO
-            status.pass();
          }
 
          /*
@@ -811,7 +807,10 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          test.mm_divisions = 0;
          if (status.next_subtest("0:0:0"))
          {
-            bool ok = midi_measures_to_pulses_test(options, test, 0, mtt, true);
+            bool ok = midi_measures_to_pulses_test
+            (
+               options, test, SEQ64_ILLEGAL_PULSE, mtt, true
+            );
             status.pass(ok);
          }
          if (status.next_subtest("1:1:0"))
@@ -825,25 +824,14 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          if (status.next_subtest("100:04:10"))
          {
             /*
-             * Result should be (100 * 3600 + 4 * 60 + 10) * 1000000
-             * microseconds, which is then multiplied by (120 * 192) and
-             * divided by (60 * 1000000).
+             * Result should be 99 * 4 * 960 + 3 * 960 + 10 = 383050
              */
 
             test.mm_measures = 100;
             test.mm_beats = 4;
             test.mm_divisions = 10;
-            bool ok = midi_measures_to_pulses_test
-            (
-               options, test, 5 * 138336000, mtt
-            );
+            bool ok = midi_measures_to_pulses_test(options, test, 383050, mtt);
             status.pass(ok);
-         }
-         // test = "100:04:10.0124";
-         if (status.next_subtest("TODO"))
-         {
-            // TODO
-            status.pass();
          }
       }
    }
@@ -898,7 +886,10 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
          std::string test = "0:0:0";            /* kind of a smoke test    */
          if (status.next_subtest(test))
          {
-            bool ok = measurestring_to_pulses_test(options, test, 0, mtt, true);
+            bool ok = measurestring_to_pulses_test
+            (
+               options, test, SEQ64_ILLEGAL_PULSE, mtt, true
+            );
             status.pass(ok);
          }
          test = "1:1:0";                        /* less smokey smoke test  */
@@ -911,20 +902,11 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
          if (status.next_subtest(test))
          {
             /*
-             * Result should be ...
+             * Result should be 99 * 4 * 192 + 3 * 192 + 10 = 76618
              */
 
-            bool ok = measurestring_to_pulses_test
-            (
-               options, test, 0 /* TODO */ , mtt
-            );
+            bool ok = measurestring_to_pulses_test(options, test, 76618, mtt);
             status.pass(ok);
-         }
-         test = "100:04:10.0124";
-         if (status.next_subtest(test))
-         {
-            // TODO
-            status.pass();
          }
 
          /*
@@ -936,7 +918,10 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
          test = "0:0:0";
          if (status.next_subtest(test))
          {
-            bool ok = measurestring_to_pulses_test(options, test, 0, mtt, true);
+            bool ok = measurestring_to_pulses_test
+            (
+               options, test, SEQ64_ILLEGAL_PULSE, mtt, true
+            );
             status.pass(ok);
          }
          test = "1:1:0";                        /* less smokey smoke test  */
@@ -949,20 +934,14 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
          if (status.next_subtest(test))
          {
             /*
-             * Result should be ...
+             * Result should be 99 * 4 * 960 + 3 * 960 + 10 = 383050
              */
 
             bool ok = measurestring_to_pulses_test
             (
-               options, test, 5 * 0 /* TODO */ , mtt
+               options, test, 383050, mtt
             );
             status.pass(ok);
-         }
-         test = "100:04:10.0124";
-         if (status.next_subtest(test))
-         {
-            // TODO
-            status.pass();
          }
       }
    }
