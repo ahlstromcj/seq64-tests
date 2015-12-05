@@ -124,41 +124,41 @@ pulses_to_midi_measures_test
 (
    const xpc::cut_options & options,
    seq64::midipulse test,
-   const seq64::midi_measures_t & target,
-   const seq64::midi_timing_t & mtt,
+   const seq64::midi_measures & target,
+   const seq64::midi_timing & mtt,
    bool show_settings
 )
 {
-   seq64::midi_measures_t results;
+   seq64::midi_measures results;
    bool result = seq64::pulses_to_midi_measures(test, mtt, results);
    if (options.is_verbose())
    {
       if (show_settings)
       {
          std::cout
-            << "PPQN = " << mtt.mt_ppqn
-            << "; beats/minute = " << mtt.mt_beats_per_minute
-            << "; beats/measure = " << mtt.mt_beats_per_measure
-            << "; beat width = " << mtt.mt_beat_width
+            << "PPQN = " << mtt.ppqn()
+            << "; beats/minute = " << mtt.beats_per_minute()
+            << "; beats/measure = " << mtt.beats_per_measure()
+            << "; beat width = " << mtt.beat_width()
             << std::endl
             ;
       }
       std::cout
          << "Source = " << test << " pulses --> '"
-         << results.mm_measures << ":"
-         << results.mm_beats << ":"
-         << results.mm_divisions << "' MIDI measures:beats:divisions"
+         << results.measures() << ":"
+         << results.beats() << ":"
+         << results.divisions() << "' MIDI measures:beats:divisions"
          << std::endl
          ;
    }
    if (result)
-      result = results.mm_measures == target.mm_measures;
+      result = results.measures() == target.measures();
 
    if (result)
-      result = results.mm_beats == target.mm_beats;
+      result = results.beats() == target.beats();
 
    if (result)
-      result = results.mm_divisions == target.mm_divisions;
+      result = results.divisions() == target.divisions();
 
    return result;
 }
@@ -173,7 +173,7 @@ pulses_to_measurestring_test
    const xpc::cut_options & options,
    seq64::midipulse test,
    const std::string & target,
-   const seq64::midi_timing_t & mtt,
+   const seq64::midi_timing & mtt,
    bool show_setting
 )
 {
@@ -184,10 +184,10 @@ pulses_to_measurestring_test
       if (show_setting)
       {
          std::cout
-            << "PPQN = " << mtt.mt_ppqn
-            << "; beats/minute = " << mtt.mt_beats_per_minute
-            << "; beats/measure = " << mtt.mt_beats_per_measure
-            << "; beat width = " << mtt.mt_beat_width
+            << "PPQN = " << mtt.ppqn()
+            << "; beats/minute = " << mtt.beats_per_minute()
+            << "; beats/measure = " << mtt.beats_per_measure()
+            << "; beat width = " << mtt.beat_width()
             << std::endl
             ;
       }
@@ -211,9 +211,9 @@ bool
 midi_measures_to_pulses_test
 (
    const xpc::cut_options & options,
-   const seq64::midi_measures_t & test,
+   const seq64::midi_measures & test,
    seq64::midipulse target,
-   const seq64::midi_timing_t & mtt,
+   const seq64::midi_timing & mtt,
    bool show_settings
 )
 {
@@ -224,18 +224,18 @@ midi_measures_to_pulses_test
       if (show_settings)
       {
          std::cout
-            << "PPQN = " << mtt.mt_ppqn
-            << "; beats/minute = " << mtt.mt_beats_per_minute
-            << "; beats/measure = " << mtt.mt_beats_per_measure
-            << "; beat width = " << mtt.mt_beat_width
+            << "PPQN = " << mtt.ppqn()
+            << "; beats/minute = " << mtt.beats_per_minute()
+            << "; beats/measure = " << mtt.beats_per_measure()
+            << "; beat width = " << mtt.beat_width()
             << std::endl
             ;
       }
       std::cout
          << "Source = "
-         << test.mm_measures << ":"
-         << test.mm_beats << ":"
-         << test.mm_divisions << " MIDI measures:beats:divisions -->"
+         << test.measures() << ":"
+         << test.beats() << ":"
+         << test.divisions() << " MIDI measures:beats:divisions -->"
          << p << " pulses"
          << std::endl
          ;
@@ -253,7 +253,7 @@ measurestring_to_pulses_test
    const xpc::cut_options & options,
    const std::string & test,
    seq64::midipulse target,
-   const seq64::midi_timing_t & mtt,
+   const seq64::midi_timing & mtt,
    bool show_settings
 )
 {
@@ -264,10 +264,10 @@ measurestring_to_pulses_test
       if (show_settings)
       {
          std::cout
-            << "PPQN = " << mtt.mt_ppqn
-            << "; beats/minute = " << mtt.mt_beats_per_minute
-            << "; beats/measure = " << mtt.mt_beats_per_measure
-            << "; beat width = " << mtt.mt_beat_width
+            << "PPQN = " << mtt.ppqn()
+            << "; beats/minute = " << mtt.beats_per_minute()
+            << "; beats/measure = " << mtt.beats_per_measure()
+            << "; beat width = " << mtt.beat_width()
             << std::endl
             ;
       }

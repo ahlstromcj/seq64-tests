@@ -3,7 +3,7 @@
  * \library       libseq64 (from the Sequencer64 project)
  * \author        Chris Ahlstrom
  * \date          2015-11-29
- * \updates       2015-12-02
+ * \updates       2015-12-05
  * \version       $Revision$
  * \license       $XPC_SUITE_GPL_LICENSE$
  *
@@ -135,7 +135,7 @@ calculations_unit_test_04_02 (const xpc::cut_options & options)
       {
          int B = 120;
          int P = 192;
-         std::string test = "0:0:0";            /* kind of a smoke test    */
+         std::string test = "0:0:0";               /* kind of a smoke test    */
          if (status.next_subtest(test))
          {
             bool ok = timestring_to_pulses_test(options, test, 0, B, P);
@@ -262,7 +262,7 @@ calculations_unit_test_04_03 (const xpc::cut_options & options)
             bool ok = pulses_to_timestring_test(options, 0, "0:0:0", B, P, true);
             status.pass(ok);
          }
-         if (status.next_subtest("1"))             /* the size of one pulse */
+         if (status.next_subtest("1"))             /* the size of one pulse   */
          {
             bool ok = pulses_to_timestring_test(options, 1, "0:0:0.002604", B, P);
             status.pass(ok);
@@ -423,16 +423,16 @@ calculations_unit_test_04_04 (const xpc::cut_options & options)
       {
          bool ok = true;
          int P = 192;                           /* PPQN                    */
-         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
-         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
-         mtt.mt_beats_per_measure = 4;
-         mtt.mt_beat_width = 4;
-         mtt.mt_ppqn = P;
+         seq64::midi_timing mtt;                /* holds MIDI parameters   */
+         mtt.beats_per_minute(0);               /* BPM is not needed here  */
+         mtt.beats_per_measure(4);
+         mtt.beat_width(4);
+         mtt.ppqn(P);
 
-         seq64::midi_measures_t target;         /* tailored for each test  */
-         target.mm_measures = 1;                /* it's re 1, not 0        */
-         target.mm_beats = 1;                   /* it's re 1, not 0        */
-         target.mm_divisions = 0;               /* it's re 0, not 1        */
+         seq64::midi_measures target;           /* tailored for each test  */
+         target.measures(1);                    /* it's re 1, not 0        */
+         target.beats(1);                       /* it's re 1, not 0        */
+         target.divisions(0);                   /* it's re 0, not 1        */
          if (status.next_subtest("0"))
          {
             /*
@@ -445,49 +445,49 @@ calculations_unit_test_04_04 (const xpc::cut_options & options)
          }
          if (status.next_subtest("1"))
          {
-            target.mm_divisions = 1;
+            target.divisions(1);
             ok = pulses_to_midi_measures_test(options, 1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN-1"))
          {
-            target.mm_divisions = P-1;
+            target.divisions(P-1);
             ok = pulses_to_midi_measures_test(options, P-1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN"))
          {
-            target.mm_beats = 2;
-            target.mm_divisions = 0;
+            target.beats(2);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN+1"))
          {
-            target.mm_beats = 2;
-            target.mm_divisions = 1;
+            target.beats(2);
+            target.divisions(1);
             ok = pulses_to_midi_measures_test(options, P+1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("2*PPQN"))
          {
-            target.mm_beats = 3;
-            target.mm_divisions = 0;
+            target.beats(3);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 2*P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("3*PPQN"))
          {
-            target.mm_beats = 4;
-            target.mm_divisions = 0;
+            target.beats(4);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 3*P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("4*PPQN"))
          {
-            target.mm_measures = 2;
-            target.mm_beats = 1;
-            target.mm_divisions = 0;
+            target.measures(2);
+            target.beats(1);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 4*P, target, mtt);
             status.pass(ok);
          }
@@ -500,11 +500,11 @@ calculations_unit_test_04_04 (const xpc::cut_options & options)
           * structure back to it "first sub-test" settings.
           */
 
-         P = 192 * 5;                     /* 960 PPQN */
-         mtt.mt_ppqn = P;
-         target.mm_measures = 1;                /* it's re 1, not 0        */
-         target.mm_beats = 1;                   /* it's re 1, not 0        */
-         target.mm_divisions = 0;               /* it's re 0, not 1        */
+         P = 192 * 5;                        /* 960 PPQN                */
+         mtt.ppqn(P);
+         target.measures(1);                /* it's re 1, not 0         */
+         target.beats(1);                   /* it's re 1, not 0         */
+         target.divisions(0);               /* it's re 0, not 1         */
          if (status.next_subtest("0"))
          {
             /*
@@ -517,49 +517,49 @@ calculations_unit_test_04_04 (const xpc::cut_options & options)
          }
          if (status.next_subtest("1"))
          {
-            target.mm_divisions = 1;
+            target.divisions(1);
             ok = pulses_to_midi_measures_test(options, 1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN-1"))
          {
-            target.mm_divisions = P-1;
+            target.divisions(P-1);
             ok = pulses_to_midi_measures_test(options, P-1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN"))
          {
-            target.mm_beats = 2;
-            target.mm_divisions = 0;
+            target.beats(2);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("PPQN+1"))
          {
-            target.mm_beats = 2;
-            target.mm_divisions = 1;
+            target.beats(2);
+            target.divisions(1);
             ok = pulses_to_midi_measures_test(options, P+1, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("2*PPQN"))
          {
-            target.mm_beats = 3;
-            target.mm_divisions = 0;
+            target.beats(3);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 2*P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("3*PPQN"))
          {
-            target.mm_beats = 4;
-            target.mm_divisions = 0;
+            target.beats(4);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 3*P, target, mtt);
             status.pass(ok);
          }
          if (status.next_subtest("4*PPQN"))
          {
-            target.mm_measures = 2;
-            target.mm_beats = 1;
-            target.mm_divisions = 0;
+            target.measures(2);
+            target.beats(1);
+            target.divisions(0);
             ok = pulses_to_midi_measures_test(options, 4*P, target, mtt);
             status.pass(ok);
          }
@@ -606,11 +606,11 @@ calculations_unit_test_04_05 (const xpc::cut_options & options)
       {
          bool ok = true;
          int P = 192;                           /* PPQN                    */
-         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
-         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
-         mtt.mt_beats_per_measure = 4;
-         mtt.mt_beat_width = 4;
-         mtt.mt_ppqn = P;
+         seq64::midi_timing mtt;                /* holds MIDI parameters   */
+         mtt.beats_per_minute(0);               /* BPM is not needed here  */
+         mtt.beats_per_measure(4);
+         mtt.beat_width(4);
+         mtt.ppqn(P);
          if (status.next_subtest("0"))
          {
             /*
@@ -665,7 +665,7 @@ calculations_unit_test_04_05 (const xpc::cut_options & options)
           */
 
          P = 5 * 192;
-         mtt.mt_ppqn = P;
+         mtt.ppqn(P);
          if (status.next_subtest("0"))
          {
             /*
@@ -756,17 +756,17 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
       }
       else
       {
-         int P = 192;                           /* PPQN                    */
-         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
-         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
-         mtt.mt_beats_per_measure = 4;
-         mtt.mt_beat_width = 4;
-         mtt.mt_ppqn = P;
+         int P = 192;                              /* PPQN                    */
+         seq64::midi_timing mtt;                   /* holds MIDI parameters   */
+         mtt.beats_per_minute(0);                  /* BPM is not needed here  */
+         mtt.beats_per_measure(4);
+         mtt.beat_width(4);
+         mtt.ppqn(P);
 
-         seq64::midi_measures_t test;           /* tailored for each test  */
-         test.mm_measures = 0;                  /* but it's re 1, not 0    */
-         test.mm_beats = 0;                     /* but it's re 1, not 0    */
-         test.mm_divisions = 0;                 /* but it's re 0, not 1    */
+         seq64::midi_measures test;                /* tailored for each test  */
+         test.measures(0);                         /* but it's re 1, not 0    */
+         test.beats(0);                            /* but it's re 1, not 0    */
+         test.divisions(0);                        /* but it's re 0, not 1    */
          if (status.next_subtest("0:0:0"))
          {
             bool ok = midi_measures_to_pulses_test
@@ -777,9 +777,9 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          }
          if (status.next_subtest("1:1:0"))
          {
-            test.mm_measures = 1;
-            test.mm_beats = 1;
-            test.mm_divisions = 0;
+            test.measures(1);
+            test.beats(1);
+            test.divisions(0);
             bool ok = midi_measures_to_pulses_test(options, test, 0, mtt);
             status.pass(ok);
          }
@@ -789,9 +789,9 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
              * Result should be 99 * 4 * 192 + 3 * 192 + 10 = 76618
              */
 
-            test.mm_measures = 100;
-            test.mm_beats = 4;
-            test.mm_divisions = 10;
+            test.measures(100);
+            test.beats(4);
+            test.divisions(10);
             bool ok = midi_measures_to_pulses_test(options, test, 76618, mtt);
             status.pass(ok);
          }
@@ -801,10 +801,10 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
           */
 
          P = 192 * 5;                     /* 960 PPQN */
-         mtt.mt_ppqn = P;
-         test.mm_measures = 0;
-         test.mm_beats = 0;
-         test.mm_divisions = 0;
+         mtt.ppqn(P);
+         test.measures(0);
+         test.beats(0);
+         test.divisions(0);
          if (status.next_subtest("0:0:0"))
          {
             bool ok = midi_measures_to_pulses_test
@@ -815,9 +815,9 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
          }
          if (status.next_subtest("1:1:0"))
          {
-            test.mm_measures = 1;
-            test.mm_beats = 1;
-            test.mm_divisions = 0;
+            test.measures(1);
+            test.beats(1);
+            test.divisions(0);
             bool ok = midi_measures_to_pulses_test(options, test, 0, mtt);
             status.pass(ok);
          }
@@ -827,9 +827,9 @@ calculations_unit_test_04_06 (const xpc::cut_options & options)
              * Result should be 99 * 4 * 960 + 3 * 960 + 10 = 383050
              */
 
-            test.mm_measures = 100;
-            test.mm_beats = 4;
-            test.mm_divisions = 10;
+            test.measures(100);
+            test.beats(4);
+            test.divisions(10);
             bool ok = midi_measures_to_pulses_test(options, test, 383050, mtt);
             status.pass(ok);
          }
@@ -878,12 +878,12 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
       else
       {
          int P = 192;
-         seq64::midi_timing_t mtt;              /* holds MIDI parameters   */
-         mtt.mt_beats_per_minute = 0;           /* BPM is not needed here  */
-         mtt.mt_beats_per_measure = 4;
-         mtt.mt_beat_width = 4;
-         mtt.mt_ppqn = P;
-         std::string test = "0:0:0";            /* kind of a smoke test    */
+         seq64::midi_timing mtt;                   /* holds MIDI parameters   */
+         mtt.beats_per_minute(0);                  /* BPM is not needed here  */
+         mtt.beats_per_measure(4);
+         mtt.beat_width(4);
+         mtt.ppqn(P);
+         std::string test = "0:0:0";               /* kind of a smoke test    */
          if (status.next_subtest(test))
          {
             bool ok = measurestring_to_pulses_test
@@ -892,7 +892,7 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
             );
             status.pass(ok);
          }
-         test = "1:1:0";                        /* less smokey smoke test  */
+         test = "1:1:0";                           /* less smokey smoke test  */
          if (status.next_subtest(test))
          {
             bool ok = measurestring_to_pulses_test(options, test, 0, mtt);
@@ -914,7 +914,7 @@ calculations_unit_test_04_07 (const xpc::cut_options & options)
           */
 
          P = 192 * 5;                     /* 960 PPQN */
-         mtt.mt_ppqn = P;
+         mtt.ppqn(P);
          test = "0:0:0";
          if (status.next_subtest(test))
          {
